@@ -1,4 +1,4 @@
-import { NewWarehouseUser } from '@/utils/types';
+import { Item, NewWarehouseUser } from '@/utils/types';
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from 'react';
 
 // Define a discriminated union type for event payloads
@@ -6,11 +6,14 @@ export type EventPayloads = {
   INITIAL_EVENT: {},
   EDIT_WAREHOUSE_USER: NewWarehouseUser,
   DELETE_WAREHOUSE_USER: NewWarehouseUser,
+  EDIT_ITEM: Item,
+  DELETE_ITEM: Item,
   // Define other event names and their payload types here
 }
 
 // Define a union of all possible event names
 type EventNames = keyof EventPayloads;
+
 
 export type Event = {
   eventName: EventNames,

@@ -1,5 +1,4 @@
 import { ColumnDef } from "@tanstack/react-table"
-import { Badge } from "../ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -11,22 +10,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
-import { Checkbox } from "@/components/ui/checkbox"
-import EventEmitter from "../../utils/EventEmitter"
+import EventEmitter from "@/utils/EventEmitter"
+import { Item } from "@/utils/types"
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type WarehouseUser = {
-  user_id: string,
-  name: string,
-  username: string,
-  email: string,
-  isBlocked: boolean
-}
 
-export const warehouseUsersColumns: ColumnDef<WarehouseUser>[] = [
+export const itemsColumns: ColumnDef<Item>[] = [
   {
-    accessorKey: "user_id",
+    accessorKey: "item_id",
     header: ({ column }) => {
       return (
         <Button
@@ -45,36 +35,37 @@ export const warehouseUsersColumns: ColumnDef<WarehouseUser>[] = [
     header: "Name",
   },
   {
-    accessorKey: "username",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          className="hover:bg-transparent p-0"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Username
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    accessorKey: "item_description",
+    header: "Description",
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "lot_number",
+    header: "Lot No",
   },
   {
-    accessorKey: "isBlocked",
-    header: "Access",
-    cell: ({ row }) => {
-      const isBlocked = row.getValue("isBlocked")
-      return <Badge variant={isBlocked ? "destructive" : "secondary"}>{isBlocked ? "Blocked" : "Active"}</Badge>
-    }
+    accessorKey: "hs_code",
+    header: "HS Code",
+  },
+  {
+    accessorKey: "item_value",
+    header: "Value",
+  },
+  {
+    accessorKey: "customer_name",
+    header: "Customer",
+  },
+  {
+    accessorKey: "customer_permit_number",
+    header: "Permit No",
+  },
+  {
+    accessorKey: "created_by",
+    header: "Creator",
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const user = row.original
+      const item = row.original
 
       return (
         <DropdownMenu>
@@ -90,18 +81,17 @@ export const warehouseUsersColumns: ColumnDef<WarehouseUser>[] = [
             <DropdownMenuGroup>
               <DropdownMenuItem className="p-0">
                 <EventEmitter
-                  payload={{ user_id: user.user_id, name: user.name, username: user.username, email: user.email, password: "", isBlocked: user.isBlocked }}
-                  eventName="EDIT_WAREHOUSE_USER"
+                  payload={{...item}}
+                  eventName="EDIT_ITEM"
                   emitOnClick={true}
                   emitButtonText="Edit"
                   emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"
                 />
               </DropdownMenuItem>
-              <DropdownMenuItem disabled>{user.isBlocked ? "Unblock" : "Block"}</DropdownMenuItem>
               <DropdownMenuItem className="p-0">
                 <EventEmitter
-                  payload={{ user_id: user.user_id, name: user.name, username: user.username, email: user.email, password: "", isBlocked: user.isBlocked }}
-                  eventName="DELETE_WAREHOUSE_USER"
+                  payload={{...item}}
+                  eventName="DELETE_ITEM"
                   emitOnClick={true}
                   emitButtonText="Delete"
                   emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"

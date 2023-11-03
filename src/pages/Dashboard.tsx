@@ -1,11 +1,10 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserContext } from "@/context/UserProvider"
 import AuthenticatedUsersLayout from './layouts/AuthenticatedUsersLayout'
 import ProtectedAxios from '@/api/protectedAxios'
 import { toast } from '@/components/ui/use-toast'
 import { AxiosError, AxiosResponse } from 'axios'
 import { Button } from '@/components/ui/button'
-import Axios from '@/api/axios'
 
 type Profile = {
     user_id: number,
@@ -30,6 +29,10 @@ const Dashboard = () => {
                 })
             })
     }
+
+    useEffect(() => {
+        fetchProfile()
+    }, [])
 
     return (
         <AuthenticatedUsersLayout>

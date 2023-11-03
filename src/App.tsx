@@ -9,6 +9,9 @@ import Dashboard from './pages/Dashboard'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import WarehouseUsersManager from './pages/WarehouseUsersManager'
+import PageNotFound from './pages/PageNotFound'
+import ItemsManager from './pages/ItemsManager'
+import AuditTrail from './pages/AuditTrail'
 
 function App() {
   const { user } = useContext(UserContext)
@@ -41,6 +44,7 @@ function App() {
             // COMMON ROUTES FOR AUTHENTICATED USERS
             <>
               <Route path='/' element={<Dashboard />} />
+              <Route path='/items-manager' element={<ItemsManager />} />
             </>
           }
 
@@ -50,6 +54,7 @@ function App() {
             // ROUTES FOR AUTHENTICATED ADMINS
             <>
               <Route path='/warehouse-users-manager' element={<WarehouseUsersManager />} />
+              <Route path='/audit-trail' element={<AuditTrail />} />
             </>
           }
 
@@ -61,6 +66,7 @@ function App() {
             </>
           }
 
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider >

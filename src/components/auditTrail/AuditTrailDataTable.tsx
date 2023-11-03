@@ -2,7 +2,6 @@ import {
   ColumnDef,
   ColumnFiltersState,
   SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -18,22 +17,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { Button } from "../ui/button"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
+import { CgSpinner } from "react-icons/cg"
 
-interface DataTableProps<TData, TValue> {
+interface DataTableProps<TData, TValue, Boolean> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  data: TData[],
+  loadingState?: Boolean
 }
 
-export function WarehouseUserDataTable<TData, TValue>({ columns, data, }: DataTableProps<TData, TValue>) {
+export function AuditTrailDataTable<TData, TValue>({ columns, data, loadingState = false }: DataTableProps<TData, TValue, Boolean>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
@@ -56,10 +51,10 @@ export function WarehouseUserDataTable<TData, TValue>({ columns, data, }: DataTa
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter by username..."
-          value={table.getColumn("username")?.getFilterValue() as string}
+          placeholder="Filter by action..."
+          value={table.getColumn("action")?.getFilterValue() as string}
           onChange={(event) =>
-            table.getColumn("username")?.setFilterValue(event.target.value)
+            table.getColumn("action")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -85,26 +80,38 @@ export function WarehouseUserDataTable<TData, TValue>({ columns, data, }: DataTa
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
+            {loadingState
+              ? (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center border">
+                    <div className="flex justify-center">
+                      <CgSpinner className="animate-spin text-3xl opacity-50" />
+                    </div>
+                  </TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
+              )
+              :
+              table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )
+            }
           </TableBody>
         </Table>
       </div>

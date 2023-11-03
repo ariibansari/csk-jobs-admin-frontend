@@ -1,25 +1,17 @@
-import React, { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { ModeToggle } from '@/components/mode-toggle'
-import "./navbar.css"
 import { useTheme } from '../theme-provider'
-import LogoutButton from '../logout-button'
-import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ChevronDown, LogOut, LogOutIcon } from 'lucide-react'
+import { ChevronDown, LogOut } from 'lucide-react'
 import { UserContext, defaultUserState } from '@/context/UserProvider'
 import Axios from '@/api/axios'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -36,6 +28,22 @@ const Navbar = () => {
     navigate("/")
   }
 
+  useEffect(() => {
+    const navLinks = document.getElementsByClassName("link")
+
+    // Loop through the links
+    for (let i = 0; i < navLinks.length; i++) {
+      const link = navLinks[i];
+
+      // Check if the link has the "active" class
+      if (link.classList.contains("active")) {
+        // If it has the "active" class, add the "text-foreground" class
+        link.classList.add("text-accent-foreground");
+      }
+    }
+
+  }, [])
+
   return (
     <nav className='border border-transparent border-b-input'>
       <div className='flex justify-between items-center py-3 container'>
@@ -48,15 +56,38 @@ const Navbar = () => {
           }
         </NavLink>
         <div className='flex items-center gap-7'>
-          <div>
-            <NavLink to="/warehouse-users-manager">Warehouse Users</NavLink>
+          <div className='flex gap-5'>
+            {/* COMMON LINKS */}
+            <>
+              <NavLink to="/items-manager" className="text-sm text-muted-foreground link">Items</NavLink>
+            </>
+
+
+            {/* ADMIN ONLY LINKS */}
+            {user.role === "ADMIN"
+              &&
+              <>
+                <NavLink to="/warehouse-users-manager" className="text-sm text-muted-foreground link">Warehouse Users</NavLink>
+                <NavLink to="/audit-trail" className="text-sm text-muted-foreground link">Audit trail</NavLink>
+              </>
+            }
+
+
+
+            {/* WAREHOUSE_USER ONLY LINKS */}
+            {user.role === "WAREHOUSE_USER"
+              &&
+              <></>
+            }
+
+
           </div>
           <div className='flex gap-3 item-center'>
             <ModeToggle />
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className='flex items-center gap-1 cursor-pointer'>
+                <div className='flex items-center gap-1 cursor-pointer text-sm'>
                   {user.username}
                   <ChevronDown className='w-4' />
                 </div>
