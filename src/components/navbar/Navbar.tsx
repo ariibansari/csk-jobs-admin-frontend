@@ -15,7 +15,9 @@ import { ChevronDown, LogOut } from 'lucide-react'
 import { UserContext, defaultUserState } from '@/context/UserProvider'
 import Axios from '@/api/axios'
 import { NavLink, useNavigate } from 'react-router-dom'
+import CustomNavLink from '../ui/customNavLink'
 
+const linkClasses = "text-sm text-muted-foreground link"
 
 const Navbar = () => {
   const { theme } = useTheme()
@@ -59,7 +61,20 @@ const Navbar = () => {
           <div className='flex gap-5'>
             {/* COMMON LINKS */}
             <>
-              <NavLink to="/items-manager" className="text-sm text-muted-foreground link">Items</NavLink>
+              <CustomNavLink to='/items-manager' label='Items' />
+
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className={`flex items-center gap-1 cursor-pointer p-0 m-0 ${linkClasses}`}>
+                    Manage
+                    <ChevronDown className='h-4 w-4' />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                  <DropdownMenuItem className='p-0'><CustomNavLink to="/unit-manager" className={`w-[100%] h-[100%] p-2`} label='Unit of Measurements' type="dropdown-item" /></DropdownMenuItem>
+                  <DropdownMenuItem className='p-0'><CustomNavLink to="/location-manager" className={`w-[100%] h-[100%] p-2`} label='Locations' type="dropdown-item" /></DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </>
 
 
@@ -67,8 +82,8 @@ const Navbar = () => {
             {user.role === "ADMIN"
               &&
               <>
-                <NavLink to="/warehouse-users-manager" className="text-sm text-muted-foreground link">Warehouse Users</NavLink>
-                <NavLink to="/audit-trail" className="text-sm text-muted-foreground link">Audit trail</NavLink>
+                <CustomNavLink to="/warehouse-users-manager" label='Warehouse Users' />
+                <CustomNavLink to="/audit-trail" label='Audit trail' />
               </>
             }
 
@@ -107,7 +122,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </nav>
+    </nav >
   )
 }
 

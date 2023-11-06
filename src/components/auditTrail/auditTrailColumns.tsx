@@ -27,6 +27,9 @@ export const auditTrailColumns: ColumnDef<AuditTrail>[] = [
   {
     accessorKey: "performed_by",
     header: "Performed By",
+    cell: ({ row }) => {
+      return row.original.username
+    }
   },
   {
     accessorKey: "timestamp",
@@ -77,5 +80,9 @@ export const auditTrailColumns: ColumnDef<AuditTrail>[] = [
       }
 
     }
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
   },
 ]

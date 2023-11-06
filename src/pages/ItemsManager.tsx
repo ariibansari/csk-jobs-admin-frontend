@@ -109,7 +109,7 @@ const ItemsManager = () => {
 
             <DeleteItemDialog
                 item={selectedItemData}
-                functionToExecuteAfterUpdatingItem={(deleted_item: Item) => {
+                functionToExecuteAfterDeletingItem={(deleted_item: Item) => {
                     setItems(prev => {
                         let updatedItems = prev.filter(item => item.item_id !== deleted_item.item_id)
                         return updatedItems

@@ -11,12 +11,12 @@ import {
 import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import EventEmitter from "@/utils/EventEmitter"
-import { Item } from "@/utils/types"
+import { Location } from "@/utils/types"
 
 
-export const itemsColumns: ColumnDef<Item>[] = [
+export const locationsColumns: ColumnDef<Location>[] = [
   {
-    accessorKey: "item_id",
+    accessorKey: "location_id",
     header: ({ column }) => {
       return (
         <Button
@@ -31,32 +31,8 @@ export const itemsColumns: ColumnDef<Item>[] = [
     },
   },
   {
-    accessorKey: "name",
-    header: "Name",
-  },
-  {
-    accessorKey: "item_description",
-    header: "Description",
-  },
-  {
-    accessorKey: "lot_number",
-    header: "Lot No",
-  },
-  {
-    accessorKey: "hs_code",
-    header: "HS Code",
-  },
-  {
-    accessorKey: "item_value",
-    header: "Value",
-  },
-  {
-    accessorKey: "customer_name",
-    header: "Customer",
-  },
-  {
-    accessorKey: "customer_permit_number",
-    header: "Permit No",
+    accessorKey: "location",
+    header: "Location",
   },
   {
     accessorKey: "username",
@@ -65,7 +41,7 @@ export const itemsColumns: ColumnDef<Item>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const item = row.original
+      const location = row.original
 
       return (
         <DropdownMenu>
@@ -81,8 +57,8 @@ export const itemsColumns: ColumnDef<Item>[] = [
             <DropdownMenuGroup>
               <DropdownMenuItem className="p-0">
                 <EventEmitter
-                  payload={{ ...item }}
-                  eventName="EDIT_ITEM"
+                  payload={{ ...location }}
+                  eventName="EDIT_LOCATION"
                   emitOnClick={true}
                   emitButtonText="Edit"
                   emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"
@@ -90,8 +66,8 @@ export const itemsColumns: ColumnDef<Item>[] = [
               </DropdownMenuItem>
               <DropdownMenuItem className="p-0">
                 <EventEmitter
-                  payload={{ ...item }}
-                  eventName="DELETE_ITEM"
+                  payload={{ ...location }}
+                  eventName="DELETE_LOCATION"
                   emitOnClick={true}
                   emitButtonText="Delete"
                   emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"

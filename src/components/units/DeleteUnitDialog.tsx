@@ -1,4 +1,4 @@
-import { Item } from '@/utils/types'
+import { Unit } from '@/utils/types'
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,30 +15,30 @@ import { UserContext } from '@/context/UserProvider'
 import ProtectedAxios from '@/api/protectedAxios'
 import { toast } from '../ui/use-toast'
 
-const DeleteItemDialog = ({ item, functionToExecuteAfterDeletingItem, toggleButton, dialogState, dialogStateSetter }: { item: Item, functionToExecuteAfterDeletingItem: Function, toggleButton?: React.ReactElement, dialogState: boolean, dialogStateSetter: Dispatch<SetStateAction<boolean>> }) => {
+const DeleteUnitDialog = ({ unit, functionToExecuteAfterDeletingUnit, toggleButton, dialogState, dialogStateSetter }: { unit: Unit, functionToExecuteAfterDeletingUnit: Function, toggleButton?: React.ReactElement, dialogState: boolean, dialogStateSetter: Dispatch<SetStateAction<boolean>> }) => {
     const { user } = useContext(UserContext)
-    const [selectedItemData, setSelectedItemData] = useState<Item>(item)
-    const [deletingItem, setDeletingItem] = useState(false)
+    const [selectedUnitData, setSelectedUnitData] = useState<Unit>(unit)
+    const [deletingUnit, setDeletingUnit] = useState(false)
     const [error, setError] = useState("")
 
     useEffect(() => {
-        setSelectedItemData(item)
-    }, [item])
+        setSelectedUnitData(unit)
+    }, [unit])
 
-    const deleteItem = () => {
-        setDeletingItem(true)
+    const deleteUnit = () => {
+        setDeletingUnit(true)
 
-        ProtectedAxios.post("/api/admin/item/delete", { user_id: user.user_id, item_id: selectedItemData.item_id })
+        ProtectedAxios.post("/api/admin/unit/delete", { user_id: user.user_id, unit_id: selectedUnitData.unit_id })
             .then(res => {
                 if (res.data) {
-                    setDeletingItem(false)
+                    setDeletingUnit(false)
                     dialogStateSetter(false)
-                    functionToExecuteAfterDeletingItem(res.data)
-                    setSelectedItemData({ item_id: 0, name: "", lot_number: "", item_description: "", hs_code: "", item_value: 0, customer_name: "", customer_permit_number: "", created_by: user.user_id, created_at: "", updated_at: "" })
+                    functionToExecuteAfterDeletingUnit(res.data)
+                    setSelectedUnitData({ unit: "", created_by: user.user_id })
                 }
             })
             .catch((error: any) => {
-                setDeletingItem(false)
+                setDeletingUnit(false)
                 if (error.response?.status === 409 && error.response?.data.error) {
                     setError(error.response?.data.error)
                     return
@@ -71,19 +71,18 @@ const DeleteItemDialog = ({ item, functionToExecuteAfterDeletingItem, toggleButt
                 }
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Delete Item</DialogTitle>
+                        <DialogTitle>Delete Unit</DialogTitle>
                     </DialogHeader>
                     <div>
-                        <p>Are you sure you want to delete this item?</p>
+                        <p>Are you sure you want to delete this unit?</p>
                         <DialogDescription>
-                            <p>Name: {selectedItemData.name}</p>
-                            <p>Descriptoin: {selectedItemData.item_description}</p>
+                            <p>{selectedUnitData.unit}</p>
                         </DialogDescription>
                     </div>
                     <DialogFooter>
-                        <Button onClick={() => deleteItem()} variant="destructive" className='gap-2' disabled={deletingItem}>
+                        <Button onClick={() => deleteUnit()} variant="destructive" className='gap-2' disabled={deletingUnit}>
                             Yes, Delete
-                            {deletingItem
+                            {deletingUnit
                                 &&
                                 <CgSpinner className="animate-spin text-xl" />
                             }
@@ -96,4 +95,4 @@ const DeleteItemDialog = ({ item, functionToExecuteAfterDeletingItem, toggleButt
     )
 }
 
-export default DeleteItemDialog
+export default DeleteUnitDialog

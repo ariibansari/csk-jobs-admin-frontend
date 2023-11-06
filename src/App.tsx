@@ -12,6 +12,8 @@ import WarehouseUsersManager from './pages/WarehouseUsersManager'
 import PageNotFound from './pages/PageNotFound'
 import ItemsManager from './pages/ItemsManager'
 import AuditTrail from './pages/AuditTrail'
+import LocationManager from './pages/LocationManager'
+import UnitManager from './pages/UnitManager'
 
 function App() {
   const { user } = useContext(UserContext)
@@ -45,6 +47,8 @@ function App() {
             <>
               <Route path='/' element={<Dashboard />} />
               <Route path='/items-manager' element={<ItemsManager />} />
+              <Route path='/unit-manager' element={<UnitManager />} />
+              <Route path='/location-manager' element={<LocationManager />} />
             </>
           }
 

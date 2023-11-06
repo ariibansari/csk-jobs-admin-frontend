@@ -1,4 +1,4 @@
-import { Item } from '@/utils/types'
+import { Location } from '@/utils/types'
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,30 +15,30 @@ import { UserContext } from '@/context/UserProvider'
 import ProtectedAxios from '@/api/protectedAxios'
 import { toast } from '../ui/use-toast'
 
-const DeleteItemDialog = ({ item, functionToExecuteAfterDeletingItem, toggleButton, dialogState, dialogStateSetter }: { item: Item, functionToExecuteAfterDeletingItem: Function, toggleButton?: React.ReactElement, dialogState: boolean, dialogStateSetter: Dispatch<SetStateAction<boolean>> }) => {
+const DeleteLocationDialog = ({ location, functionToExecuteAfterDeletingLocation, toggleButton, dialogState, dialogStateSetter }: { location: Location, functionToExecuteAfterDeletingLocation: Function, toggleButton?: React.ReactElement, dialogState: boolean, dialogStateSetter: Dispatch<SetStateAction<boolean>> }) => {
     const { user } = useContext(UserContext)
-    const [selectedItemData, setSelectedItemData] = useState<Item>(item)
-    const [deletingItem, setDeletingItem] = useState(false)
+    const [selectedLocationData, setSelectedLocationData] = useState<Location>(location)
+    const [deletingLocation, setDeletingLocation] = useState(false)
     const [error, setError] = useState("")
 
     useEffect(() => {
-        setSelectedItemData(item)
-    }, [item])
+        setSelectedLocationData(location)
+    }, [location])
 
-    const deleteItem = () => {
-        setDeletingItem(true)
+    const deleteLocation = () => {
+        setDeletingLocation(true)
 
-        ProtectedAxios.post("/api/admin/item/delete", { user_id: user.user_id, item_id: selectedItemData.item_id })
+        ProtectedAxios.post("/api/admin/location/delete", { user_id: user.user_id, location_id: selectedLocationData.location_id })
             .then(res => {
                 if (res.data) {
-                    setDeletingItem(false)
+                    setDeletingLocation(false)
                     dialogStateSetter(false)
-                    functionToExecuteAfterDeletingItem(res.data)
-                    setSelectedItemData({ item_id: 0, name: "", lot_number: "", item_description: "", hs_code: "", item_value: 0, customer_name: "", customer_permit_number: "", created_by: user.user_id, created_at: "", updated_at: "" })
+                    functionToExecuteAfterDeletingLocation(res.data)
+                    setSelectedLocationData({ location: "", created_by: user.user_id })
                 }
             })
             .catch((error: any) => {
-                setDeletingItem(false)
+                setDeletingLocation(false)
                 if (error.response?.status === 409 && error.response?.data.error) {
                     setError(error.response?.data.error)
                     return
@@ -71,19 +71,18 @@ const DeleteItemDialog = ({ item, functionToExecuteAfterDeletingItem, toggleButt
                 }
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Delete Item</DialogTitle>
+                        <DialogTitle>Delete Location</DialogTitle>
                     </DialogHeader>
                     <div>
                         <p>Are you sure you want to delete this item?</p>
                         <DialogDescription>
-                            <p>Name: {selectedItemData.name}</p>
-                            <p>Descriptoin: {selectedItemData.item_description}</p>
+                            <p>{selectedLocationData.location}</p>
                         </DialogDescription>
                     </div>
                     <DialogFooter>
-                        <Button onClick={() => deleteItem()} variant="destructive" className='gap-2' disabled={deletingItem}>
+                        <Button onClick={() => deleteLocation()} variant="destructive" className='gap-2' disabled={deletingLocation}>
                             Yes, Delete
-                            {deletingItem
+                            {deletingLocation
                                 &&
                                 <CgSpinner className="animate-spin text-xl" />
                             }
@@ -96,4 +95,4 @@ const DeleteItemDialog = ({ item, functionToExecuteAfterDeletingItem, toggleButt
     )
 }
 
-export default DeleteItemDialog
+export default DeleteLocationDialog
