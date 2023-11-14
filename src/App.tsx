@@ -1,19 +1,21 @@
 import './App.css'
 import { ThemeProvider } from "@/components/theme-provider"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import SignIn from '@/pages/SignIn'
+import SignIn from '@/pages/Auth/SignIn'
 import { useContext } from 'react'
 import { UserContext } from './context/UserProvider'
 import { Toaster } from './components/ui/toaster'
 import Dashboard from './pages/Dashboard'
-import ForgotPassword from './pages/ForgotPassword'
-import ResetPassword from './pages/ResetPassword'
+import ForgotPassword from './pages/Auth/ForgotPassword'
+import ResetPassword from './pages/Auth/ResetPassword'
 import WarehouseUsersManager from './pages/WarehouseUsersManager'
 import PageNotFound from './pages/PageNotFound'
 import ItemsManager from './pages/ItemsManager'
 import AuditTrail from './pages/AuditTrail'
 import LocationManager from './pages/LocationManager'
 import UnitManager from './pages/UnitManager'
+import StockTransfersManager from './pages/StockTransfers/StockTransfersManager'
+import NewStockTransfer from './pages/StockTransfers/NewStockTransfer'
 
 function App() {
   const { user } = useContext(UserContext)
@@ -49,6 +51,9 @@ function App() {
               <Route path='/items-manager' element={<ItemsManager />} />
               <Route path='/unit-manager' element={<UnitManager />} />
               <Route path='/location-manager' element={<LocationManager />} />
+              <Route path='/manage-stocks' element={<StockTransfersManager />} />
+              <Route path='/stock-transfer/stock-in' element={<NewStockTransfer transferType='IN'/>} />
+              <Route path='/stock-transfer/stock-out' element={<NewStockTransfer transferType='OUT'/>} />
             </>
           }
 

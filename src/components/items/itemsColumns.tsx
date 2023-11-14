@@ -12,6 +12,8 @@ import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import EventEmitter from "@/utils/EventEmitter"
 import { Item } from "@/utils/types"
+import { useContext } from "react"
+import { UserContext } from "@/context/UserProvider"
 
 
 export const itemsColumns: ColumnDef<Item>[] = [
@@ -33,6 +35,10 @@ export const itemsColumns: ColumnDef<Item>[] = [
   {
     accessorKey: "name",
     header: "Name",
+  },
+  {
+    accessorKey: "unit",
+    header: "Unit",
   },
   {
     accessorKey: "item_description",
@@ -64,9 +70,10 @@ export const itemsColumns: ColumnDef<Item>[] = [
   },
   {
     id: "actions",
+    header: "Actions",
     cell: ({ row }) => {
       const item = row.original
-
+      const { user } = useContext(UserContext)
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -88,15 +95,18 @@ export const itemsColumns: ColumnDef<Item>[] = [
                   emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"
                 />
               </DropdownMenuItem>
-              <DropdownMenuItem className="p-0">
-                <EventEmitter
-                  payload={{ ...item }}
-                  eventName="DELETE_ITEM"
-                  emitOnClick={true}
-                  emitButtonText="Delete"
-                  emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"
-                />
-              </DropdownMenuItem>
+              {user.role === "ADMIN"
+                &&
+                <DropdownMenuItem className="p-0">
+                  <EventEmitter
+                    payload={{ ...item }}
+                    eventName="DELETE_ITEM"
+                    emitOnClick={true}
+                    emitButtonText="Delete"
+                    emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"
+                  />
+                </DropdownMenuItem>
+              }
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import SignInForm from "@/components/forms/SignInForm"
 import { useTheme } from "@/components/theme-provider"
-import UnauthenticatedUsersLayout from "./layouts/UnauthenticatedUsersLayout"
+import UnauthenticatedUsersLayout from "../layouts/UnauthenticatedUsersLayout"
 import { toast } from '@/components/ui/use-toast'
 
 const SignIn = () => {

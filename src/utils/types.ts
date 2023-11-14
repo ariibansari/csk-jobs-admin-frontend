@@ -18,6 +18,8 @@ export type Item = {
     customer_permit_number: string,
     created_by: number,
     username?: string,
+    unit_id?: number,
+    unit?: string,
     created_at: string,
     updated_at?: string,
 }
@@ -51,4 +53,20 @@ export type Unit = {
     username?: string,
     created_at?: string,
     updated_at?: string
+}
+
+export type StockTransfer = {
+    stock_transfer_id?: number,
+    quantity: number,
+    transferred_at: "",
+    created_at?: ""
+    transferred_by: number,
+    transferred_by_username?: string,
+    item_id: number,
+    item_name?: string
+    unit_id: number,
+    unit?: string,
+    location_id: number,
+    location?: string,
+    transfer_type: "IN" | "OUT "
 }

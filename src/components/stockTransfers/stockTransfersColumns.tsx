@@ -1,4 +1,4 @@
-import { ColumnDef } from "@tanstack/react-table"
+import { Column, ColumnDef, FilterFn } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -9,16 +9,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { ArrowDown, ArrowUp, ArrowUpDown, MoreHorizontal } from "lucide-react"
 import EventEmitter from "@/utils/EventEmitter"
-import { Unit } from "@/utils/types"
-import { useContext } from "react"
+import { StockTransfer } from "@/utils/types"
+import { useContext, useMemo, useState } from "react"
 import { UserContext } from "@/context/UserProvider"
+import { format } from "date-fns"
 
-
-export const unitsColumns: ColumnDef<Unit>[] = [
+export const stockTransfersColumns: ColumnDef<StockTransfer>[] = [
   {
-    accessorKey: "unit_id",
+    accessorKey: "stock_transfer_id",
     header: ({ column }) => {
       return (
         <Button
@@ -33,22 +33,61 @@ export const unitsColumns: ColumnDef<Unit>[] = [
     },
   },
   {
+    accessorKey: "transferred_at",
+    header: "Date Time",
+    cell: ({ row }) => {
+      return format(new Date(row.original.transferred_at), "dd/MM/yyyy, p")
+    },
+    meta: {
+      showFilter: true,
+      filterType: "date_range"
+    }
+  },
+  {
+    accessorKey: "item_name",
+    header: "Item",
+  },
+  {
+    accessorKey: "quantity",
+    header: "Quantity",
+  },
+  {
     accessorKey: "unit",
     header: "Unit",
   },
   {
-    accessorKey: "username",
-    header: "Creator",
+    accessorKey: "location",
+    header: "Location",
+  },
+  {
+    accessorKey: "transfer_type",
+    header: "IN/OUT",
+    cell: ({ row }) => {
+      const { transfer_type } = row.original
+      return (
+        <div className="flex items-center gap-1">
+          {transfer_type === "IN"
+            ? <ArrowDown className="w-4 h-4 text-green-500" />
+            : <ArrowUp className="w-4 h-4 text-destructive" />
+          }
+          {transfer_type}
+        </div>
+      )
+
+    }
+  },
+  {
+    accessorKey: "transferred_by_username",
+    header: "Transferred By",
   },
   {
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
-      const unit = row.original
+      const stock_transfer = row.original
       const { user } = useContext(UserContext)
 
       if (user.role === "ADMIN") {
-
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -63,17 +102,8 @@ export const unitsColumns: ColumnDef<Unit>[] = [
               <DropdownMenuGroup>
                 <DropdownMenuItem className="p-0">
                   <EventEmitter
-                    payload={{ ...unit }}
-                    eventName="EDIT_UNIT"
-                    emitOnClick={true}
-                    emitButtonText="Edit"
-                    emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"
-                  />
-                </DropdownMenuItem>
-                <DropdownMenuItem className="p-0">
-                  <EventEmitter
-                    payload={{ ...unit }}
-                    eventName="DELETE_UNIT"
+                    payload={{ ...stock_transfer }}
+                    eventName="DELETE_STOCK_TRANSFER"
                     emitOnClick={true}
                     emitButtonText="Delete"
                     emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"
@@ -83,9 +113,6 @@ export const unitsColumns: ColumnDef<Unit>[] = [
             </DropdownMenuContent>
           </DropdownMenu>
         )
-      }
-      else {
-        return <div className="px-5">-</div>
       }
     },
   },

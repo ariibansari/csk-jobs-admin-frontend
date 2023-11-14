@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import UnauthenticatedUsersLayout from "./layouts/UnauthenticatedUsersLayout"
+import UnauthenticatedUsersLayout from "../layouts/UnauthenticatedUsersLayout"
 import { useNavigate } from "react-router-dom"
 import React, { useState } from "react"
 import { CgSpinner } from "react-icons/cg"

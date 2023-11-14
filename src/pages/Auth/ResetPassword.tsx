@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import UnauthenticatedUsersLayout from './layouts/UnauthenticatedUsersLayout'
+import UnauthenticatedUsersLayout from '../layouts/UnauthenticatedUsersLayout'
 import { CgSpinner } from 'react-icons/cg'
 import Axios from '@/api/axios'
 import { toast } from '@/components/ui/use-toast'

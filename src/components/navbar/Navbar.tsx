@@ -16,6 +16,8 @@ import { UserContext, defaultUserState } from '@/context/UserProvider'
 import Axios from '@/api/axios'
 import { NavLink, useNavigate } from 'react-router-dom'
 import CustomNavLink from '../ui/customNavLink'
+import darkLogo from "../../assets/images/wearnes-black-logo.png"
+import lightLogo from "../../assets/images/wearnes-white-logo.png"
 
 const linkClasses = "text-sm text-muted-foreground link"
 
@@ -52,15 +54,16 @@ const Navbar = () => {
         <NavLink to="/">
           {theme === "light"
             ?
-            <img src="./images/wearnes-black-logo.png" alt="logo" className="w-20" />
+            <img src={darkLogo} alt="logo" className="w-20" />
             :
-            <img src="./images/wearnes-white-logo.png" alt="logo" className="w-20" />
+            <img src={lightLogo} alt="logo" className="w-20" />
           }
         </NavLink>
         <div className='flex items-center gap-7'>
           <div className='flex gap-5'>
             {/* COMMON LINKS */}
             <>
+              <CustomNavLink to='/manage-stocks' label='Stocks' />
               <CustomNavLink to='/items-manager' label='Items' />
 
               <DropdownMenu>

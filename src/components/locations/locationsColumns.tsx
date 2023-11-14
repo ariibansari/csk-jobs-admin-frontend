@@ -12,6 +12,8 @@ import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import EventEmitter from "@/utils/EventEmitter"
 import { Location } from "@/utils/types"
+import { useContext } from "react"
+import { UserContext } from "@/context/UserProvider"
 
 
 export const locationsColumns: ColumnDef<Location>[] = [
@@ -40,8 +42,10 @@ export const locationsColumns: ColumnDef<Location>[] = [
   },
   {
     id: "actions",
+    header: "Actions",
     cell: ({ row }) => {
       const location = row.original
+      const { user } = useContext(UserContext)
 
       return (
         <DropdownMenu>
@@ -64,15 +68,18 @@ export const locationsColumns: ColumnDef<Location>[] = [
                   emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"
                 />
               </DropdownMenuItem>
-              <DropdownMenuItem className="p-0">
-                <EventEmitter
-                  payload={{ ...location }}
-                  eventName="DELETE_LOCATION"
-                  emitOnClick={true}
-                  emitButtonText="Delete"
-                  emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"
-                />
-              </DropdownMenuItem>
+              {user.role === "ADMIN"
+                &&
+                <DropdownMenuItem className="p-0">
+                  <EventEmitter
+                    payload={{ ...location }}
+                    eventName="DELETE_LOCATION"
+                    emitOnClick={true}
+                    emitButtonText="Delete"
+                    emitButtonClasses="w-[100%] px-2 py-1 rounded-sm"
+                  />
+                </DropdownMenuItem>
+              }
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

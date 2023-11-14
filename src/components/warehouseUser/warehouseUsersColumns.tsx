@@ -72,6 +72,7 @@ export const warehouseUsersColumns: ColumnDef<WarehouseUser>[] = [
   },
   {
     id: "actions",
+    header: "Actions",
     cell: ({ row }) => {
       const user = row.original
 

@@ -9,10 +9,12 @@ import { UnitsDataTable } from "@/components/units/UnitsDataTable"
 import { unitsColumns } from "@/components/units/unitsColumns"
 import EditUnitDialog from "@/components/units/EditUnitDialog"
 import DeleteUnitDialog from "@/components/units/DeleteUnitDialog"
+import { UserContext } from "@/context/UserProvider"
 
 
 const UnitManager = () => {
     const { event, setEvent } = useContext(EventContext)
+    const { user } = useContext(UserContext)
 
     const [units, setUnits] = useState<Unit[]>([])
     const [fetchingUnits, setFetchingUnits] = useState(false)
@@ -80,16 +82,19 @@ const UnitManager = () => {
     return (
         <AuthenticatedUsersLayout>
             <div className='flex justify-between'>
-                <h1 className='text-2xl font-medium'>Manage Locations</h1>
-                <CreateUnitDialog
-                    functionToExecuteAfterAddingUnit={(new_unit: Unit) => {
-                        setUnits(prev => {
-                            let updatedUnits = [...prev]
-                            updatedUnits.unshift(new_unit)
-                            return updatedUnits
-                        })
-                    }}
-                />
+                <h1 className='text-2xl font-medium'>Manage Units</h1>
+                {user.role === "ADMIN"
+                    &&
+                    <CreateUnitDialog
+                        functionToExecuteAfterAddingUnit={(new_unit: Unit) => {
+                            setUnits(prev => {
+                                let updatedUnits = [...prev]
+                                updatedUnits.unshift(new_unit)
+                                return updatedUnits
+                            })
+                        }}
+                    />
+                }
             </div>
 
             <UnitsDataTable columns={unitsColumns} data={units} loadingState={fetchingUnits} />
