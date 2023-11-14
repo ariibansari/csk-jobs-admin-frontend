@@ -70,3 +70,25 @@ export type StockTransfer = {
     location?: string,
     transfer_type: "IN" | "OUT "
 }
+
+export type ItemReport = {
+    item_id: number,
+    name: string,
+    unit: string,
+    item_description: string,
+    item_value: number,
+    hs_code: string,
+    quantity_by_location: Object,
+    total_quantity: number
+}
+
+export type InventoryReport = {
+    item_id: number,
+    name: string,
+    item_description: string,
+    hs_code: string,
+    quantity: number,
+    unit: string,
+    location_id: number,
+    location: string,
+}

@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import { ArrowUpDown } from "lucide-react"
 import { AuditTrail } from "@/utils/types"
+import { format } from "date-fns"
 
 
 export const auditTrailColumns: ColumnDef<AuditTrail>[] = [
@@ -34,6 +35,9 @@ export const auditTrailColumns: ColumnDef<AuditTrail>[] = [
   {
     accessorKey: "timestamp",
     header: "Time",
+    cell: ({row})=>{
+      return format(new Date(row.original.timestamp), "Pp")
+    }
   },
   {
     accessorKey: "table_name",

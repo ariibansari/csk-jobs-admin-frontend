@@ -28,7 +28,7 @@ interface DataTableProps<TData, TValue, Boolean> {
   loadingState?: Boolean
 }
 
-export function WarehouseUserDataTable<TData, TValue>({ columns, data, loadingState = false }: DataTableProps<TData, TValue, boolean>) {
+export function InventoryReportDataTable<TData, TValue>({ columns, data, loadingState = false }: DataTableProps<TData, TValue, Boolean>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
@@ -51,10 +51,10 @@ export function WarehouseUserDataTable<TData, TValue>({ columns, data, loadingSt
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter by username..."
-          value={table.getColumn("username")?.getFilterValue() as string}
+          placeholder="Filter by name..."
+          value={table.getColumn("name")?.getFilterValue() as string}
           onChange={(event) =>
-            table.getColumn("username")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -91,28 +91,26 @@ export function WarehouseUserDataTable<TData, TValue>({ columns, data, loadingSt
                 </TableRow>
               )
               :
-              table.getRowModel().rows?.length ?
-                (
-                  table.getRowModel().rows.map((row) => (
-                    <TableRow
-                      key={row.id}
-                      data-state={row.getIsSelected() && "selected"}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id} className="align-top">
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))
-                ) :
-                (
-                  <TableRow>
-                    <TableCell colSpan={columns.length} className="h-24 text-center">
-                      No results.
-                    </TableCell>
+              table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id} className="align-top">
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
                   </TableRow>
-                )
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )
             }
           </TableBody>
         </Table>

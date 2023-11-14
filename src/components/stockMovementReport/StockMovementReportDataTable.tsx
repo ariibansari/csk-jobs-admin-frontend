@@ -1,13 +1,16 @@
 import {
-  ColumnDef,
+  useReactTable,
   ColumnFiltersState,
-  SortingState,
-  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFacetedMinMaxValues,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable,
+  ColumnDef,
+  flexRender,
+  SortingState,
 } from "@tanstack/react-table"
 import {
   Table,
@@ -28,9 +31,9 @@ interface DataTableProps<TData, TValue, Boolean> {
   loadingState?: Boolean
 }
 
-export function AuditTrailDataTable<TData, TValue>({ columns, data, loadingState = false }: DataTableProps<TData, TValue, Boolean>) {
+export function StockMovementReportDataTable<TData, TValue>({ columns, data, loadingState = false }: DataTableProps<TData, TValue, Boolean>) {
   const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([{ id: "transferred_at", value: "" }])
 
   const table = useReactTable({
     data,
@@ -41,43 +44,51 @@ export function AuditTrailDataTable<TData, TValue>({ columns, data, loadingState
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues(),
     state: {
       sorting,
-      columnFilters,
+      columnFilters
     },
   })
 
+
   return (
     <div>
-      <div className="flex items-center py-4">
+      {/* <div className="flex items-center py-4">
         <Input
-          placeholder="Filter by name..."
-          value={table.getColumn("name")?.getFilterValue() as string}
+          placeholder="Filter by item..."
+          value={table.getColumn("item_name")?.getFilterValue() as string}
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
+            table.getColumn("item_name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
-      </div>
+      </div> */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
+            {table.getHeaderGroups().map((headerGroup) => {
+              return (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        <div className="flex gap-1 items-center">
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                        </div>
+                      </TableHead>
+                    )
+                  })}
+                </TableRow>
+              )
+            })}
           </TableHeader>
           <TableBody>
             {loadingState
@@ -98,7 +109,7 @@ export function AuditTrailDataTable<TData, TValue>({ columns, data, loadingState
                     data-state={row.getIsSelected() && "selected"}
                   >
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="align-top">
+                      <TableCell key={cell.id}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}

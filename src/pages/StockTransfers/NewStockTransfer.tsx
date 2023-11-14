@@ -188,7 +188,7 @@ const NewStockTransfer = ({ transferType }: { transferType: "IN" | "OUT" }) => {
         }
 
         if (transferType === "OUT" && quantity > currentStock.quantity) {
-            setError("Quantity must be less then or equal to 300")
+            setError(`Quantity must be less then or equal to ${currentStock.quantity}`)
             return
         }
 

@@ -16,6 +16,9 @@ import LocationManager from './pages/LocationManager'
 import UnitManager from './pages/UnitManager'
 import StockTransfersManager from './pages/StockTransfers/StockTransfersManager'
 import NewStockTransfer from './pages/StockTransfers/NewStockTransfer'
+import ItemReport from './pages/reports/ItemReport'
+import InventoryReport from './pages/reports/InventoryReport'
+import StockMovementReport from './pages/reports/StockMovementReport'
 
 function App() {
   const { user } = useContext(UserContext)
@@ -52,8 +55,11 @@ function App() {
               <Route path='/unit-manager' element={<UnitManager />} />
               <Route path='/location-manager' element={<LocationManager />} />
               <Route path='/manage-stocks' element={<StockTransfersManager />} />
-              <Route path='/stock-transfer/stock-in' element={<NewStockTransfer transferType='IN'/>} />
-              <Route path='/stock-transfer/stock-out' element={<NewStockTransfer transferType='OUT'/>} />
+              <Route path='/stock-transfer/stock-in' element={<NewStockTransfer transferType='IN' />} />
+              <Route path='/stock-transfer/stock-out' element={<NewStockTransfer transferType='OUT' />} />
+              <Route path='/reports/item' element={<ItemReport />} />
+              <Route path='/reports/inventory' element={<InventoryReport />} />
+              <Route path='/reports/stock-movement' element={<StockMovementReport />} />
             </>
           }
 
