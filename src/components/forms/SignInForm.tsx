@@ -69,7 +69,6 @@ const SignInForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className='w-80 flex flex-col gap-6'>
-            api url: {import.meta.env.VITE_API_BASE_URL}
             <div className='input-grp'>
                 <Label htmlFor="username">Username</Label>
                 <Input type="text" required id="username" value={username} onChange={e => setUsername(e.target.value)} />
