@@ -22,7 +22,7 @@ import StockMovementReport from './pages/reports/StockMovementReport'
 
 function App() {
   const { user } = useContext(UserContext)
-
+  alert("debug")
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
       <Toaster />
