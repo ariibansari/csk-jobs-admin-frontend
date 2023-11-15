@@ -35,10 +35,6 @@ const SignIn = () => {
           <h2 className="text-3xl font-medium text-center">Login</h2>
         </div>
         <SignInForm />
-
-        <p className='mt-20'>
-          DEBUG: {import.meta.env.VITE_API_BASE_URL}
-        </p>
       </div>
     </UnauthenticatedUsersLayout>
   )
