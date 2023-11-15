@@ -15,7 +15,7 @@ import {
 import { Label } from '@radix-ui/react-label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Eye, EyeOff, Minus, X } from 'lucide-react'
+import { Eye, EyeOff, X } from 'lucide-react'
 
 const ResetPassword = () => {
     const { resetToken } = useParams()
@@ -75,12 +75,14 @@ const ResetPassword = () => {
 
         Axios.post("/api/auth/resetPassword", { password_recovery_token: resetToken, new_password: confirmPassword })
             .then(res => {
-                toast({
-                    variant: "success",
-                    title: "Password reset was successful"
-                })
-                setResettingPassword(false)
-                navigate("/")
+                if (res.data) {
+                    toast({
+                        variant: "success",
+                        title: "Password reset was successful"
+                    })
+                    setResettingPassword(false)
+                    navigate("/")
+                }
             })
             .catch((error: any) => {
                 setResettingPassword(false)

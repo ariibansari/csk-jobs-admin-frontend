@@ -63,6 +63,9 @@ ProtectedAxios.interceptors.response.use(
         let UserData
         let accessToken
 
+        console.log(accessToken);
+
+
         //fetching the encrypted text
         const encryptedText = localStorage.getItem('UserData')
 

@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 
-const CustomNavLink = ({ to, label, className, type }: { to: string, label: string, className?: string, type?: "default" | "dropdown-item" }) => {
+const CustomNavLink = ({ to, label, className }: { to: string, label: string, className?: string, type?: "default" | "dropdown-item" }) => {
     const { pathname } = useLocation()
 
     return (

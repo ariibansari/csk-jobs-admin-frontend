@@ -19,7 +19,6 @@ const DeleteItemDialog = ({ item, functionToExecuteAfterDeletingItem, toggleButt
     const { user } = useContext(UserContext)
     const [selectedItemData, setSelectedItemData] = useState<Item>(item)
     const [deletingItem, setDeletingItem] = useState(false)
-    const [error, setError] = useState("")
 
     useEffect(() => {
         setSelectedItemData(item)
@@ -40,7 +39,6 @@ const DeleteItemDialog = ({ item, functionToExecuteAfterDeletingItem, toggleButt
             .catch((error: any) => {
                 setDeletingItem(false)
                 if (error.response?.status === 409 && error.response?.data.error) {
-                    setError(error.response?.data.error)
                     return
                 }
 

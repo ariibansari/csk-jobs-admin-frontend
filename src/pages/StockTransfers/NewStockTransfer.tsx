@@ -20,10 +20,9 @@ import { Label } from "@radix-ui/react-label"
 import { Skeleton } from "@/components/ui/skeleton"
 import { toast } from "@/components/ui/use-toast"
 import ProtectedAxios from "@/api/protectedAxios"
-import { Item, Location, Unit } from "@/utils/types"
+import { Item, Location } from "@/utils/types"
 import CreateItemDialog from "@/components/items/CreateItemDialog"
 import { Input } from "@/components/ui/input"
-import CreateUnitDialog from "@/components/units/CreateUnitDialog"
 import { Box, TrendingDown, TrendingUp, X } from "lucide-react"
 import CreateLocationDialog from "@/components/locations/CreateLocationDialog"
 import { DateTimePicker } from "@/components/ui/dateTimePicker"
@@ -32,10 +31,7 @@ import { CgSpinner } from "react-icons/cg"
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
 

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import AuthenticatedUsersLayout from "./layouts/AuthenticatedUsersLayout"
-import { Item, Location } from "@/utils/types"
+import { Location } from "@/utils/types"
 import ProtectedAxios from "@/api/protectedAxios"
 import { toast } from "@/components/ui/use-toast"
 import { EventContext } from "@/context/EventProvider"

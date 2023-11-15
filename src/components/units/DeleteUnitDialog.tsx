@@ -19,7 +19,6 @@ const DeleteUnitDialog = ({ unit, functionToExecuteAfterDeletingUnit, toggleButt
     const { user } = useContext(UserContext)
     const [selectedUnitData, setSelectedUnitData] = useState<Unit>(unit)
     const [deletingUnit, setDeletingUnit] = useState(false)
-    const [error, setError] = useState("")
 
     useEffect(() => {
         setSelectedUnitData(unit)
@@ -40,7 +39,6 @@ const DeleteUnitDialog = ({ unit, functionToExecuteAfterDeletingUnit, toggleButt
             .catch((error: any) => {
                 setDeletingUnit(false)
                 if (error.response?.status === 409 && error.response?.data.error) {
-                    setError(error.response?.data.error)
                     return
                 }
 

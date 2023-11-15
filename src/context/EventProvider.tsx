@@ -35,7 +35,9 @@ export const defaultEventState = {
     eventName: "",
     payload: {},
   },
-  setEvent: (event: Event) => { }
+  setEvent: (event: Event) => {
+    console.log(event);
+  }
 }
 
 

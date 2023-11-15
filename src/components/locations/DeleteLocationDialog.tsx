@@ -19,7 +19,6 @@ const DeleteLocationDialog = ({ location, functionToExecuteAfterDeletingLocation
     const { user } = useContext(UserContext)
     const [selectedLocationData, setSelectedLocationData] = useState<Location>(location)
     const [deletingLocation, setDeletingLocation] = useState(false)
-    const [error, setError] = useState("")
 
     useEffect(() => {
         setSelectedLocationData(location)
@@ -40,7 +39,6 @@ const DeleteLocationDialog = ({ location, functionToExecuteAfterDeletingLocation
             .catch((error: any) => {
                 setDeletingLocation(false)
                 if (error.response?.status === 409 && error.response?.data.error) {
-                    setError(error.response?.data.error)
                     return
                 }
 

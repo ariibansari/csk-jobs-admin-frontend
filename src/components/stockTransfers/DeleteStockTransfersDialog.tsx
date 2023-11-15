@@ -1,4 +1,4 @@
-import { StockTransfer, Unit } from '@/utils/types'
+import { StockTransfer } from '@/utils/types'
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
@@ -20,7 +20,6 @@ const DeleteStockTransfersDialog = ({ stockTransfer, functionToExecuteAfterDelet
     const { user } = useContext(UserContext)
     const [selectedStockTransferData, setSelectedStockTransferData] = useState<StockTransfer>(stockTransfer)
     const [deletingStockTransfer, setDeletingStockTransfer] = useState(false)
-    const [error, setError] = useState("")
 
     useEffect(() => {
         setSelectedStockTransferData(stockTransfer)
@@ -41,7 +40,7 @@ const DeleteStockTransfersDialog = ({ stockTransfer, functionToExecuteAfterDelet
             .catch((error: any) => {
                 setDeletingStockTransfer(false)
                 if (error.response?.status === 409 && error.response?.data.error) {
-                    setError(error.response?.data.error)
+                    // setError(error.response?.data.error)
                     return
                 }
 

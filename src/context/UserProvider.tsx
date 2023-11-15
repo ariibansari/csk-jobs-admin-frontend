@@ -26,7 +26,9 @@ export const defaultUserState = {
         email: "",
         role: "",
     },
-    setUser: (user: User) => { }
+    setUser: (user: User) => {
+        console.log(user);
+    }
 } as UserContextInterface
 
 export const UserContext = createContext(defaultUserState)

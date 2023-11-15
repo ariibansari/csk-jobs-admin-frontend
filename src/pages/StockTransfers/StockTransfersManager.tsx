@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react"
-import { StockTransfer, Unit } from "@/utils/types"
+import { StockTransfer } from "@/utils/types"
 import ProtectedAxios from "@/api/protectedAxios"
 import { toast } from "@/components/ui/use-toast"
 import { EventContext } from "@/context/EventProvider"
-import { UserContext } from "@/context/UserProvider"
 import AuthenticatedUsersLayout from "../layouts/AuthenticatedUsersLayout"
 import { NavLink } from "react-router-dom"
 import { Button } from "@/components/ui/button"
@@ -20,10 +19,8 @@ import { Input } from "@/components/ui/input"
 
 const StockTransferManager = () => {
   const { event, setEvent } = useContext(EventContext)
-  const { user } = useContext(UserContext)
 
   const [stockTransfers, setStockTransfers] = useState<StockTransfer[]>([])
-  const [backupStockTransfers, setBackupStockTransfers] = useState<StockTransfer[]>([])
   const [fetchingStockTransfers, setFetchingStockTransfers] = useState(false)
 
   const [selectedStockTransferData, setSelectedStockTransferData] = useState<StockTransfer>({ quantity: 0, transferred_at: "", transferred_by: 0, item_id: 0, unit_id: 0, location_id: 0, transfer_type: "IN" })
@@ -46,7 +43,6 @@ const StockTransferManager = () => {
       .then(res => {
         if (res.data) {
           setStockTransfers(res.data)
-          setBackupStockTransfers(res.data)
           setFetchingStockTransfers(false)
         }
       })

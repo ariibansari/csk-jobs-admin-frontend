@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import { ArrowUpDown } from "lucide-react"
-import { InventoryReport, ItemReport } from "@/utils/types"
+import { InventoryReport } from "@/utils/types"
 
 
 export const inventoryReportColumns: ColumnDef<InventoryReport>[] = [

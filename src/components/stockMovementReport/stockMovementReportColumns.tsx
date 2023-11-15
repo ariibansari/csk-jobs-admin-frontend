@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
-import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react"
+import { ArrowUpDown } from "lucide-react"
 import { StockTransfer } from "@/utils/types"
 import { format } from "date-fns"
 

@@ -1,4 +1,4 @@
-import { Location, Unit } from '@/utils/types'
+import { Unit } from '@/utils/types'
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
