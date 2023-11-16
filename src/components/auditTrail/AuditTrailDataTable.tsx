@@ -52,9 +52,9 @@ export function AuditTrailDataTable<TData, TValue>({ columns, data, loadingState
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter by name..."
-          value={table.getColumn("name")?.getFilterValue() as string}
+          value={table.getColumn("action")?.getFilterValue() as string}
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
+            table.getColumn("action")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

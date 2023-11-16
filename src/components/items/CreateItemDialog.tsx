@@ -85,7 +85,7 @@ const CreateItemDialog = ({ functionToExecuteAfterAddingItem, toggleButton }: { 
             return
         }
 
-        ProtectedAxios.post("/api/common/item/add", { ...newItemData, unit_id: selectedUnit.unit_id })
+        ProtectedAxios.post("/api/common/item/add", { ...newItemData, unit_id: selectedUnit.unit_id, user_id: user.user_id })
             .then(res => {
                 if (res.data) {
                     setCreatingNewItem(false)
