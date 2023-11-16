@@ -481,7 +481,7 @@ const NewStockTransfer = ({ transferType }: { transferType: "IN" | "OUT" }) => {
                             </div>
 
                             <div className="flex justify-between items-center w-[100%] mt-16">
-                                <NavLink to="/manage-stocks">
+                                <NavLink to="/">
                                     <Button variant="ghost">
                                         Manage Stocks
                                     </Button>

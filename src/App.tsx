@@ -49,11 +49,10 @@ function App() {
             &&
             // COMMON ROUTES FOR AUTHENTICATED USERS
             <>
-              <Route path='/' element={<Dashboard />} />
+              <Route path='/' element={<StockTransfersManager />} />
               <Route path='/items-manager' element={<ItemsManager />} />
               <Route path='/unit-manager' element={<UnitManager />} />
               <Route path='/location-manager' element={<LocationManager />} />
-              <Route path='/manage-stocks' element={<StockTransfersManager />} />
               <Route path='/stock-transfer/stock-in' element={<NewStockTransfer transferType='IN' />} />
               <Route path='/stock-transfer/stock-out' element={<NewStockTransfer transferType='OUT' />} />
               <Route path='/reports/item' element={<ItemReport />} />

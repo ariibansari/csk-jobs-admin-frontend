@@ -63,7 +63,7 @@ const Navbar = () => {
           <div className='flex gap-5'>
             {/* COMMON LINKS */}
             <>
-              <CustomNavLink to='/manage-stocks' label='Stocks' />
+              <CustomNavLink to='/' label='Stocks' />
               <CustomNavLink to='/items-manager' label='Items' />
 
               <DropdownMenu>
