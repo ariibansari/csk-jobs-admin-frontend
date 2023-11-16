@@ -32,7 +32,7 @@ const SignIn = () => {
           <h3 className="text-m font-medium text-center">Warehouse Management System</h3>
         </div>
         <div className="my-10">
-          <h2 className="text-3xl font-medium text-center">TEST - Login</h2>
+          <h2 className="text-3xl font-medium text-center">Login</h2>
         </div>
         <SignInForm />
       </div>
