@@ -61,7 +61,7 @@ export const auditTrailColumns: ColumnDef<AuditTrail>[] = [
           </div>
         )
       }
-      if (auditTrail.action === "ITEM_DELETED") {
+      if (auditTrail.action === "ITEM_DELETED" && auditTrail.status === "SUCCESS") {
         return (
           <div className="flex flex-col gap-2 ">
             <div className="">Name: <span className="">{auditTrail.data_before?.name}</span></div>
@@ -81,7 +81,7 @@ export const auditTrailColumns: ColumnDef<AuditTrail>[] = [
           </div>
         )
       }
-      if (auditTrail.action === "UNIT_DELETED") {
+      if (auditTrail.action === "UNIT_DELETED" && auditTrail.status === "SUCCESS") {
         return (
           <div className="flex flex-col gap-2 ">
             <div className="">Unit: <span className="">{auditTrail.data_before?.unit}</span></div>
@@ -95,7 +95,7 @@ export const auditTrailColumns: ColumnDef<AuditTrail>[] = [
           </div>
         )
       }
-      if (auditTrail.action === "LOCATION_DELETED") {
+      if (auditTrail.action === "LOCATION_DELETED" && auditTrail.status === "SUCCESS") {
         return (
           <div className="flex flex-col gap-2 ">
             <div className="">Location: <span className="">{auditTrail.data_before?.location}</span></div>
