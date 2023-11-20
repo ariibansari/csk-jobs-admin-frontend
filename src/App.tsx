@@ -18,6 +18,7 @@ import NewStockTransfer from './pages/StockTransfers/NewStockTransfer'
 import ItemReport from './pages/reports/ItemReport'
 import InventoryReport from './pages/reports/InventoryReport'
 import StockMovementReport from './pages/reports/StockMovementReport'
+import ItemHistoryReport from './pages/reports/ItemHistoryReport'
 
 function App() {
   const { user } = useContext(UserContext)
@@ -55,6 +56,7 @@ function App() {
               <Route path='/stock-transfer/stock-in' element={<NewStockTransfer transferType='IN' />} />
               <Route path='/stock-transfer/stock-out' element={<NewStockTransfer transferType='OUT' />} />
               <Route path='/reports/item' element={<ItemReport />} />
+              <Route path='/reports/item-history' element={<ItemHistoryReport />} />
               <Route path='/reports/inventory' element={<InventoryReport />} />
               <Route path='/reports/stock-movement' element={<StockMovementReport />} />
             </>

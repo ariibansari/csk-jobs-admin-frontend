@@ -4,7 +4,7 @@ import { ArrowUpDown } from "lucide-react"
 import { ItemReport } from "@/utils/types"
 
 
-export const itemReportColumns: ColumnDef<ItemReport>[] = [
+export const itemHistoryReportColumns: ColumnDef<ItemReport>[] = [
   {
     accessorKey: "item_id",
     header: ({ column }) => {

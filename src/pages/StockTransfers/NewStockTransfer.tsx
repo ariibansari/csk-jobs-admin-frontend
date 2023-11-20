@@ -134,7 +134,7 @@ const NewStockTransfer = ({ transferType }: { transferType: "IN" | "OUT" }) => {
                         toast({
                             itemID: "stockQuantityToast",
                             variant: "destructive",
-                            title: `'${selectedItem?.name}' have 0 stock at '${selectedLocation?.location}'. Change the item or location to continue stock out`
+                            title: `'${selectedItem?.item_name}' have 0 stock at '${selectedLocation?.location}'. Change the item or location to continue stock out`
                         })
                     }
                 }
@@ -279,7 +279,7 @@ const NewStockTransfer = ({ transferType }: { transferType: "IN" | "OUT" }) => {
                                                         className="w-[100%] justify-between"
                                                     >
                                                         {selectedItem
-                                                            ? <>{selectedItem.name.substring(0, 30)} {selectedItem?.name.length > 30 && "..."}</>
+                                                            ? <>{selectedItem.item_name.substring(0, 30)} {selectedItem?.item_name.length > 30 && "..."}</>
                                                             : "No item selected..."}
                                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                     </Button>
@@ -304,7 +304,7 @@ const NewStockTransfer = ({ transferType }: { transferType: "IN" | "OUT" }) => {
                                                                             selectedItem?.item_id === item.item_id ? "opacity-100" : "opacity-0"
                                                                         )}
                                                                     />
-                                                                    {item.name}
+                                                                    {item.item_name}
                                                                 </CommandItem>
                                                             ))}
                                                         </CommandGroup>

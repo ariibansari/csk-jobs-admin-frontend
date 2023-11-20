@@ -33,7 +33,7 @@ const DeleteItemDialog = ({ item, functionToExecuteAfterDeletingItem, toggleButt
                     setDeletingItem(false)
                     dialogStateSetter(false)
                     functionToExecuteAfterDeletingItem(res.data)
-                    setSelectedItemData({ item_id: 0, name: "", lot_number: "", item_description: "", hs_code: "", item_value: 0, customer_name: "", customer_permit_number: "", created_by: user.user_id, created_at: "", updated_at: "" })
+                    setSelectedItemData({ item_name: "", lot_number: "", hs_code: "", item_value: 0, customer_name: "", customs_permit_number: "", remarks: "", sku: "", artist_name: "", dimension: "", year_of_creation: 0, created_by: 0, created_at: "" })
                 }
             })
             .catch((error: any) => {
@@ -74,8 +74,8 @@ const DeleteItemDialog = ({ item, functionToExecuteAfterDeletingItem, toggleButt
                     <div>
                         <p>Are you sure you want to delete this item?</p>
                         <DialogDescription>
-                            <p>Name: {selectedItemData.name}</p>
-                            <p>Descriptoin: {selectedItemData.item_description}</p>
+                            <p>Item Name: {selectedItemData.item_name}</p>
+                            <p>Remark: {selectedItemData.remarks}</p>
                         </DialogDescription>
                     </div>
                     <DialogFooter>

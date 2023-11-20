@@ -28,7 +28,7 @@ interface DataTableProps<TData, TValue, Boolean> {
   loadingState?: Boolean
 }
 
-export function ItemReportDataTable<TData, TValue>({ columns, data, loadingState = false }: DataTableProps<TData, TValue, Boolean>) {
+export function ItemHistoryReportDataTable<TData, TValue>({ columns, data, loadingState = false }: DataTableProps<TData, TValue, Boolean>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 

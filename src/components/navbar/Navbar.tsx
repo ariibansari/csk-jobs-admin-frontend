@@ -18,6 +18,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import CustomNavLink from '../ui/customNavLink'
 import darkLogo from "../../assets/images/wearnes-black-logo.png"
 import lightLogo from "../../assets/images/wearnes-white-logo.png"
+import Logo from '../ui/logo'
 
 const linkClasses = "text-sm text-muted-foreground link"
 
@@ -52,12 +53,7 @@ const Navbar = () => {
     <nav className='border border-transparent border-b-input'>
       <div className='flex justify-between items-center py-3 container'>
         <NavLink to="/">
-          {theme === "light"
-            ?
-            <img src={darkLogo} alt="logo" className="w-20" />
-            :
-            <img src={lightLogo} alt="logo" className="w-20" />
-          }
+          <Logo />
         </NavLink>
         <div className='flex items-center gap-7'>
           <div className='flex gap-5'>
@@ -87,6 +83,7 @@ const Navbar = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">
                   <DropdownMenuItem className='p-0'><CustomNavLink to="/reports/item" className={`w-[100%] h-[100%] p-2`} label='Item' type="dropdown-item" /></DropdownMenuItem>
+                  <DropdownMenuItem className='p-0'><CustomNavLink to="/reports/item-history" className={`w-[100%] h-[100%] p-2`} label='Item History' type="dropdown-item" /></DropdownMenuItem>
                   <DropdownMenuItem className='p-0'><CustomNavLink to="/reports/inventory" className={`w-[100%] h-[100%] p-2`} label='Inventory' type="dropdown-item" /></DropdownMenuItem>
                   <DropdownMenuItem className='p-0'><CustomNavLink to="/reports/stock-movement" className={`w-[100%] h-[100%] p-2`} label='Stock Movement' type="dropdown-item" /></DropdownMenuItem>
                 </DropdownMenuContent>

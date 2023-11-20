@@ -36,7 +36,7 @@ import { NavLink } from 'react-router-dom'
 
 const CreateItemDialog = ({ functionToExecuteAfterAddingItem, toggleButton }: { functionToExecuteAfterAddingItem: Function, toggleButton?: React.ReactElement }) => {
     const { user } = useContext(UserContext)
-    const [newItemData, setNewItemData] = useState<Item>({ item_id: 0, name: "", lot_number: "", item_description: "", hs_code: "", item_value: 0, customer_name: "", customer_permit_number: "", created_by: user.user_id, created_at: "", updated_at: "" })
+    const [newItemData, setNewItemData] = useState<Item>({ item_id: 0, item_name: "", lot_number: "", hs_code: "", item_value: 0, customer_name: "", customs_permit_number: "", remarks: "", sku: "", artist_name: "", dimension: "", year_of_creation: new Date().getFullYear(), created_by: user.user_id, created_at: "", updated_at: "" })
     const [creatingNewItem, setCreatingNewItem] = useState(false)
     const [createNewItemDialogState, setCreateNewItemDialogState] = useState(false)
     const [error, setError] = useState("")
@@ -85,13 +85,19 @@ const CreateItemDialog = ({ functionToExecuteAfterAddingItem, toggleButton }: { 
             return
         }
 
+        if (newItemData.year_of_creation.toString().length !== 4) {
+            setError("Please enter a valid value for Year of creation")
+            setCreatingNewItem(false)
+            return
+        }
+
         ProtectedAxios.post("/api/common/item/add", { ...newItemData, unit_id: selectedUnit.unit_id, user_id: user.user_id })
             .then(res => {
                 if (res.data) {
                     setCreatingNewItem(false)
                     setCreateNewItemDialogState(false)
-                    functionToExecuteAfterAddingItem({ ...newItemData, item_id: res.data.item_id, created_at: res.data.created_at, updated_at: res.data.updated_at, unit_id: res.data.unit_id, unit: res.data.unit })
-                    setNewItemData({ item_id: 0, name: "", lot_number: "", item_description: "", hs_code: "", item_value: 0, customer_name: "", customer_permit_number: "", created_by: user.user_id, created_at: "", updated_at: "" })
+                    functionToExecuteAfterAddingItem({ ...newItemData, item_id: res.data.item_id, created_at: res.data.created_at, updated_at: res.data.updated_at, unit_id: res.data.unit_id, unit: res.data.unit, username: user.username })
+                    setNewItemData({ item_id: 0, item_name: "", lot_number: "", hs_code: "", item_value: 0, customer_name: "", customs_permit_number: "", remarks: "", sku: "", artist_name: "", dimension: "", year_of_creation: 0, created_by: user.user_id, created_at: "", updated_at: "" })
                 }
             })
             .catch((error: any) => {
@@ -180,61 +186,94 @@ const CreateItemDialog = ({ functionToExecuteAfterAddingItem, toggleButton }: { 
                                 :
                                 <form onSubmit={createNewItem}>
                                     <div className="grid gap-4 py-4">
-                                        <div className="">
-                                            <Label htmlFor="name" className="text-right">
-                                                Name
-                                            </Label>
-                                            <Input required type='text' id="name" className="col-span-3" value={newItemData.name} onChange={e => { setError(""); setNewItemData({ ...newItemData, name: e.target.value }) }} />
-                                        </div>
-
-                                        <div className="">
-                                            <Label htmlFor="description" className="text-right">
-                                                Item Description
-                                            </Label>
-                                            <Textarea required id="description" className="col-span-3" value={newItemData.item_description} onChange={e => { setError(""); setNewItemData({ ...newItemData, item_description: e.target.value }) }} />
-                                        </div>
 
                                         <div className='grid grid-cols-2 gap-4'>
+                                            <div className="">
+                                                <Label htmlFor="name" className="text-right">
+                                                    Item Name
+                                                </Label>
+                                                <Input required type='text' id="name" className="col-span-3" value={newItemData.item_name} onChange={e => { setError(""); setNewItemData({ ...newItemData, item_name: e.target.value }) }} />
+                                            </div>
+
                                             <div className="">
                                                 <Label htmlFor="lot_number" className="text-right">
                                                     Lot Number
                                                 </Label>
                                                 <Input required type='text' id="lot_number" className="col-span-3" value={newItemData.lot_number} onChange={e => { setError(""); setNewItemData({ ...newItemData, lot_number: e.target.value }) }} />
                                             </div>
+                                        </div>
 
+
+                                        <div className='grid grid-cols-2 gap-4'>
                                             <div className="">
                                                 <Label htmlFor="hs_code" className="text-right">
                                                     HS Code
                                                 </Label>
                                                 <Input required type='text' id="hs_code" className="col-span-3" value={newItemData.hs_code} onChange={e => { setError(""); setNewItemData({ ...newItemData, hs_code: e.target.value }) }} />
                                             </div>
-                                        </div>
 
-                                        <div className='grid grid-cols-2 gap-4'>
                                             <div className="">
                                                 <Label htmlFor="item_value" className="text-right">
-                                                    Item Value
+                                                    Item Value (SGD)
                                                 </Label>
                                                 <Input required type='number' id="item_value" className="col-span-3" value={newItemData.item_value} onChange={e => { setError(""); setNewItemData({ ...newItemData, item_value: parseFloat(e.target.value) }) }} />
                                             </div>
+                                        </div>
 
+
+                                        <div className='grid grid-cols-2 gap-4'>
                                             <div className="">
                                                 <Label htmlFor="customer_name" className="text-right">
                                                     Customer Name
                                                 </Label>
                                                 <Input required type='text' id="customer_name" className="col-span-3" value={newItemData.customer_name} onChange={e => { setError(""); setNewItemData({ ...newItemData, customer_name: e.target.value }) }} />
                                             </div>
+
+                                            <div className="">
+                                                <Label htmlFor="customs_permit_number" className="text-right">
+                                                    Customs Permit Number
+                                                </Label>
+                                                <Input required type='text' id="customs_permit_number" className="col-span-3" value={newItemData.customs_permit_number} onChange={e => { setError(""); setNewItemData({ ...newItemData, customs_permit_number: e.target.value }) }} />
+                                            </div>
                                         </div>
 
-                                        <div className="">
-                                            <Label htmlFor="customer_permit_number" className="text-right">
-                                                Customer Permit Number
-                                            </Label>
-                                            <Input required type='text' id="customer_permit_number" className="col-span-3" value={newItemData.customer_permit_number} onChange={e => { setError(""); setNewItemData({ ...newItemData, customer_permit_number: e.target.value }) }} />
+
+                                        <div className='grid grid-cols-2 gap-4'>
+                                            <div className="">
+                                                <Label htmlFor="sku" className="text-right">
+                                                    SKU
+                                                </Label>
+                                                <Input required type='text' id="sku" className="col-span-3" value={newItemData.sku} onChange={e => { setError(""); setNewItemData({ ...newItemData, sku: e.target.value }) }} />
+                                            </div>
+
+                                            <div className="">
+                                                <Label htmlFor="artist_name" className="text-right">
+                                                    Artist Name
+                                                </Label>
+                                                <Input required type='text' id="artist_name" className="col-span-3" value={newItemData.artist_name} onChange={e => { setError(""); setNewItemData({ ...newItemData, artist_name: e.target.value }) }} />
+                                            </div>
                                         </div>
+
+
+                                        <div className='grid grid-cols-2 gap-4'>
+                                            <div className="">
+                                                <Label htmlFor="dimension" className="text-right">
+                                                    Dimension
+                                                </Label>
+                                                <Input required type='text' id="dimension" className="col-span-3" value={newItemData.dimension} onChange={e => { setError(""); setNewItemData({ ...newItemData, dimension: e.target.value }) }} />
+                                            </div>
+
+                                            <div className="">
+                                                <Label htmlFor="year_of_creation" className="text-right">
+                                                    Year of creation
+                                                </Label>
+                                                <Input required type='number' id="year_of_creation" className="col-span-3" value={newItemData.year_of_creation} onChange={e => { setError(""); setNewItemData({ ...newItemData, year_of_creation: parseInt(e.target.value) }) }} />
+                                            </div>
+                                        </div>
+
 
                                         <div>
-                                            <Label className="text-sm">Select Unit of Measurement</Label>
+                                            <Label className="text-sm">Unit of Measurement</Label>
                                             <Popover open={unitsSelectState} onOpenChange={setUnitsSelectState}>
                                                 <PopoverTrigger asChild>
                                                     <Button
@@ -275,6 +314,13 @@ const CreateItemDialog = ({ functionToExecuteAfterAddingItem, toggleButton }: { 
                                                     </Command>
                                                 </PopoverContent>
                                             </Popover>
+                                        </div>
+
+                                        <div className="">
+                                            <Label htmlFor="description" className="text-right">
+                                                Remarks
+                                            </Label>
+                                            <Textarea id="description" className="col-span-3" value={newItemData.remarks} onChange={e => { setError(""); setNewItemData({ ...newItemData, remarks: e.target.value }) }} />
                                         </div>
 
                                         {error.length > 0

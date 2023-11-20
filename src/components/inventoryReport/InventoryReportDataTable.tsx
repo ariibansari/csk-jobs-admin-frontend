@@ -51,10 +51,10 @@ export function InventoryReportDataTable<TData, TValue>({ columns, data, loading
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter by name..."
-          value={table.getColumn("name")?.getFilterValue() as string}
+          placeholder="Filter by item name..."
+          value={table.getColumn("item_name")?.getFilterValue() as string}
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
+            table.getColumn("item_name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

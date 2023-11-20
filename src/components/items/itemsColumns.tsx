@@ -33,16 +33,12 @@ export const itemsColumns: ColumnDef<Item>[] = [
     },
   },
   {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: "item_name",
+    header: "Item Name",
   },
   {
     accessorKey: "unit",
     header: "Unit",
-  },
-  {
-    accessorKey: "item_description",
-    header: "Description",
   },
   {
     accessorKey: "lot_number",
@@ -61,12 +57,32 @@ export const itemsColumns: ColumnDef<Item>[] = [
     header: "Customer",
   },
   {
-    accessorKey: "customer_permit_number",
+    accessorKey: "customs_permit_number",
     header: "Permit No",
   },
   {
+    accessorKey: "remarks",
+    header: "Remark",
+  },
+  {
+    accessorKey: "sku",
+    header: "SKU",
+  },
+  {
+    accessorKey: "artist_name",
+    header: "Artist",
+  },
+  {
+    accessorKey: "dimension",
+    header: "Dimension",
+  },
+  {
+    accessorKey: "year_of_creation",
+    header: "Year of creation",
+  },
+  {
     accessorKey: "username",
-    header: "Creator",
+    header: "Created by",
   },
   {
     id: "actions",

@@ -16,7 +16,7 @@ const ItemsManager = () => {
     const [items, setItems] = useState<Item[]>([])
     const [fetchingItems, setFetchingItems] = useState(false)
 
-    const [selectedItemData, setSelectedItemData] = useState<Item>({ name: "", item_description: "", lot_number: "", hs_code: "", item_value: 0, customer_name: "", customer_permit_number: "", created_by: 0, created_at: "" })
+    const [selectedItemData, setSelectedItemData] = useState<Item>({ item_name: "", lot_number: "", hs_code: "", item_value: 0, customer_name: "", customs_permit_number: "", remarks: "", sku: "", artist_name: "", dimension: "", year_of_creation: 0, created_by: 0, created_at: "" })
     const [editItemDialogState, setEditItemDialogState] = useState(false)
     const [deleteItemDialogState, setDeleteItemDialogState] = useState(false)
 
@@ -56,7 +56,7 @@ const ItemsManager = () => {
     useEffect(() => {
         if (event.eventName === "EDIT_ITEM") {
             const data: any = event.payload
-            setSelectedItemData({ item_id: data.item_id, name: data.name, item_description: data.item_description, lot_number: data.lot_number, hs_code: data.hs_code, item_value: data.item_value, customer_name: data.customer_name, customer_permit_number: data.customer_permit_number, created_by: data.created_by, created_at: data.created_at, unit_id: data.unit_id, unit: data.unit })
+            setSelectedItemData({ item_id: data.item_id, item_name: data.item_name, lot_number: data.lot_number, hs_code: data.hs_code, item_value: data.item_value, customer_name: data.customer_name, customs_permit_number: data.customs_permit_number, remarks: data.remarks, sku: data.sku, artist_name: data.artist_name, dimension: data.dimension, year_of_creation: data.year_of_creation, created_by: data.created_by, created_at: data.created_at, unit_id: data.unit_id, unit: data.unit })
             setEditItemDialogState(true)
 
             //reset the event
@@ -68,7 +68,7 @@ const ItemsManager = () => {
     useEffect(() => {
         if (event.eventName === "DELETE_ITEM") {
             const data: any = event.payload
-            setSelectedItemData({ item_id: data.item_id, name: data.name, item_description: data.item_description, lot_number: data.lot_number, hs_code: data.hs_code, item_value: data.item_value, customer_name: data.customer_name, customer_permit_number: data.customer_permit_number, created_by: data.created_by, created_at: data.created_at, unit_id: data.unit_id, unit: data.unit })
+            setSelectedItemData({ item_id: data.item_id, item_name: data.item_name, lot_number: data.lot_number, hs_code: data.hs_code, item_value: data.item_value, customer_name: data.customer_name, customs_permit_number: data.customs_permit_number, remarks: data.remarks, sku: data.sku, artist_name: data.artist_name, dimension: data.dimension, year_of_creation: data.year_of_creation, created_by: data.created_by, created_at: data.created_at, unit_id: data.unit_id, unit: data.unit })
             setDeleteItemDialogState(true)
 
             //reset the event

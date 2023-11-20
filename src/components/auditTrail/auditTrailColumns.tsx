@@ -51,26 +51,34 @@ export const auditTrailColumns: ColumnDef<AuditTrail>[] = [
       if (auditTrail.action === "ITEM_UPDATED") {
         return (
           <div className="flex flex-col gap-2 ">
-            <div className="">Name: <span className="">{auditTrail.data_before?.name}</span></div>
-            <div className="">Description: <span className="">{auditTrail.data_before?.item_description}</span></div>
+            <div className="">Name: <span className="">{auditTrail.data_before?.item_name}</span></div>
             <div className="">Lot No: <span className="">{auditTrail.data_before?.lot_number}</span></div>
             <div className="">HS Code: <span className="">{auditTrail.data_before?.hs_code}</span></div>
             <div className="">Value: <span className="">{auditTrail.data_before?.item_value}</span></div>
             <div className="">Customer: <span className="">{auditTrail.data_before?.customer_name}</span></div>
-            <div className="">Permit No: <span className="">{auditTrail.data_before?.customer_permit_number}</span></div>
+            <div className="">Permit No: <span className="">{auditTrail.data_before?.customs_permit_number}</span></div>
+            <div className="">Remarks: <span className="">{auditTrail.data_before?.remarks}</span></div>
+            <div className="">SKU: <span className="">{auditTrail.data_before?.sku}</span></div>
+            <div className="">Artist Name: <span className="">{auditTrail.data_before?.artist_name}</span></div>
+            <div className="">Dimension: <span className="">{auditTrail.data_before?.dimension}</span></div>
+            <div className="">Year of creation: <span className="">{auditTrail.data_before?.year_of_creation}</span></div>
           </div>
         )
       }
       if (auditTrail.action === "ITEM_DELETED" && auditTrail.status === "SUCCESS") {
         return (
           <div className="flex flex-col gap-2 ">
-            <div className="">Name: <span className="">{auditTrail.data_before?.name}</span></div>
-            <div className="">Description: <span className="">{auditTrail.data_before?.item_description}</span></div>
+            <div className="">Name: <span className="">{auditTrail.data_before?.item_name}</span></div>
             <div className="">Lot No: <span className="">{auditTrail.data_before?.lot_number}</span></div>
             <div className="">HS Code: <span className="">{auditTrail.data_before?.hs_code}</span></div>
             <div className="">Value: <span className="">{auditTrail.data_before?.item_value}</span></div>
             <div className="">Customer: <span className="">{auditTrail.data_before?.customer_name}</span></div>
-            <div className="">Permit No: <span className="">{auditTrail.data_before?.customer_permit_number}</span></div>
+            <div className="">Permit No: <span className="">{auditTrail.data_before?.customs_permit_number}</span></div>
+            <div className="">Remarks: <span className="">{auditTrail.data_before?.remarks}</span></div>
+            <div className="">SKU: <span className="">{auditTrail.data_before?.sku}</span></div>
+            <div className="">Artist Name: <span className="">{auditTrail.data_before?.artist_name}</span></div>
+            <div className="">Dimension: <span className="">{auditTrail.data_before?.dimension}</span></div>
+            <div className="">Year of creation: <span className="">{auditTrail.data_before?.year_of_creation}</span></div>
           </div>
         )
       }
@@ -129,26 +137,34 @@ export const auditTrailColumns: ColumnDef<AuditTrail>[] = [
       if (auditTrail.action === "ITEM_CREATED") {
         return (
           <div className="flex flex-col gap-2 ">
-            <div className="">Name: <span className="">{auditTrail.data_after?.name}</span></div>
-            <div className="">Description: <span className="">{auditTrail.data_after?.item_description}</span></div>
+            <div className="">Name: <span className="">{auditTrail.data_after?.item_name}</span></div>
             <div className="">Lot No: <span className="">{auditTrail.data_after?.lot_number}</span></div>
             <div className="">HS Code: <span className="">{auditTrail.data_after?.hs_code}</span></div>
             <div className="">Value: <span className="">{auditTrail.data_after?.item_value}</span></div>
             <div className="">Customer: <span className="">{auditTrail.data_after?.customer_name}</span></div>
-            <div className="">Permit No: <span className="">{auditTrail.data_after?.customer_permit_number}</span></div>
+            <div className="">Permit No: <span className="">{auditTrail.data_after?.customs_permit_number}</span></div>
+            <div className="">Remarks: <span className="">{auditTrail.data_after?.remarks}</span></div>
+            <div className="">SKU: <span className="">{auditTrail.data_after?.sku}</span></div>
+            <div className="">Artist Name: <span className="">{auditTrail.data_after?.artist_name}</span></div>
+            <div className="">Dimension: <span className="">{auditTrail.data_after?.dimension}</span></div>
+            <div className="">Year of creation: <span className="">{auditTrail.data_after?.year_of_creation}</span></div>
           </div>
         )
       }
       if (auditTrail.action === "ITEM_UPDATED") {
         return (
           <div className="flex flex-col gap-2 ">
-            <div className="">Name: <span className="">{auditTrail.data_after?.name}</span></div>
-            <div className="">Description: <span className="">{auditTrail.data_after?.item_description}</span></div>
+            <div className="">Name: <span className="">{auditTrail.data_after?.item_name}</span></div>
             <div className="">Lot No: <span className="">{auditTrail.data_after?.lot_number}</span></div>
             <div className="">HS Code: <span className="">{auditTrail.data_after?.hs_code}</span></div>
             <div className="">Value: <span className="">{auditTrail.data_after?.item_value}</span></div>
             <div className="">Customer: <span className="">{auditTrail.data_after?.customer_name}</span></div>
-            <div className="">Permit No: <span className="">{auditTrail.data_after?.customer_permit_number}</span></div>
+            <div className="">Permit No: <span className="">{auditTrail.data_after?.customs_permit_number}</span></div>
+            <div className="">Remarks: <span className="">{auditTrail.data_after?.remarks}</span></div>
+            <div className="">SKU: <span className="">{auditTrail.data_after?.sku}</span></div>
+            <div className="">Artist Name: <span className="">{auditTrail.data_after?.artist_name}</span></div>
+            <div className="">Dimension: <span className="">{auditTrail.data_after?.dimension}</span></div>
+            <div className="">Year of creation: <span className="">{auditTrail.data_after?.year_of_creation}</span></div>
           </div>
         )
       }

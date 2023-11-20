@@ -45,7 +45,7 @@ export const stockTransfersColumns: ColumnDef<StockTransfer>[] = [
   },
   {
     accessorKey: "item_name",
-    header: "Item",
+    header: "Item Name",
   },
   {
     accessorKey: "quantity",

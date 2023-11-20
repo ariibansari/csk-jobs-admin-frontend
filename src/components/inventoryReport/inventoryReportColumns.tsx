@@ -21,12 +21,12 @@ export const inventoryReportColumns: ColumnDef<InventoryReport>[] = [
     },
   },
   {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: "item_name",
+    header: "Item Name",
   },
   {
-    accessorKey: "item_description",
-    header: "Description",
+    accessorKey: "remarks",
+    header: "Remarks",
   },
   {
     accessorKey: "hs_code",
