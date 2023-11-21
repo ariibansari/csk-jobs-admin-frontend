@@ -4,6 +4,7 @@ import { useTheme } from "@/components/theme-provider"
 import UnauthenticatedUsersLayout from "../layouts/UnauthenticatedUsersLayout"
 import { toast } from '@/components/ui/use-toast'
 import LogoCropped from '@/components/ui/logoCropped'
+import Logo from '@/components/ui/logo'
 
 const SignIn = () => {
   const { theme } = useTheme()
@@ -30,7 +31,7 @@ const SignIn = () => {
             :
             <img src="./images/wearnes-white-logo.png" alt="logo" className="w-20" />
           } */}
-          <LogoCropped />
+          <Logo />
           <h3 className="text-m font-medium text-center">Warehouse Management System</h3>
         </div>
         <div className="my-10">
