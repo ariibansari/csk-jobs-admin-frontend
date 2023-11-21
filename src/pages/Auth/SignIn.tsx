@@ -3,6 +3,7 @@ import SignInForm from "@/components/forms/SignInForm"
 import { useTheme } from "@/components/theme-provider"
 import UnauthenticatedUsersLayout from "../layouts/UnauthenticatedUsersLayout"
 import { toast } from '@/components/ui/use-toast'
+import LogoCropped from '@/components/ui/logoCropped'
 
 const SignIn = () => {
   const { theme } = useTheme()
@@ -23,12 +24,13 @@ const SignIn = () => {
     <UnauthenticatedUsersLayout>
       <div className='h-[100dvh] flex flex-col justify-center items-center'>
         <div className="flex flex-col items-center gap-2">
-          {theme === "light"
+          {/* {theme === "light"
             ?
             <img src="./images/wearnes-black-logo.png" alt="logo" className="w-20" />
             :
             <img src="./images/wearnes-white-logo.png" alt="logo" className="w-20" />
-          }
+          } */}
+          <LogoCropped />
           <h3 className="text-m font-medium text-center">Warehouse Management System</h3>
         </div>
         <div className="my-10">
