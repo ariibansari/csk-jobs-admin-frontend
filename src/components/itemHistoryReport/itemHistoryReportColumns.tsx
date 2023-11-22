@@ -31,6 +31,9 @@ export const itemHistoryReportColumns: ColumnDef<ItemReport>[] = [
   {
     accessorKey: "item_value",
     header: "Value",
+    cell: ({ row }) => {
+      return row.original.item_value.toLocaleString()
+    }
   },
   {
     accessorKey: "unit",

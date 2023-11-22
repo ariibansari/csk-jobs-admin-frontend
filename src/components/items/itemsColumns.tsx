@@ -51,6 +51,9 @@ export const itemsColumns: ColumnDef<Item>[] = [
   {
     accessorKey: "item_value",
     header: "Value",
+    cell: ({ row }) => {
+      return row.original.item_value.toLocaleString()
+    }
   },
   {
     accessorKey: "customer_name",
