@@ -45,7 +45,7 @@ const Navbar = () => {
             {user.role === "ADMIN"
               &&
               <>
-                
+
               </>
             }
 
@@ -65,7 +65,7 @@ const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className='flex items-center gap-1 cursor-pointer text-sm'>
-                  {user.username}
+                  {user.name}
                   <ChevronDown className='w-4' />
                 </div>
               </DropdownMenuTrigger>
