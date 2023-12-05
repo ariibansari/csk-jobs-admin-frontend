@@ -3,8 +3,9 @@ import SignInForm from "@/components/forms/SignInForm"
 import UnauthenticatedUsersLayout from "../layouts/UnauthenticatedUsersLayout"
 import { toast } from '@/components/ui/use-toast'
 import Logo from '@/components/ui/logo'
+import SignUpForm from '@/components/forms/SignUpForm'
 
-const SignIn = () => {
+const SignUp = () => {
   const queryParameters = new URLSearchParams(window.location.search)
   const sessionExpired = queryParameters.get("sessionExpired")
 
@@ -25,12 +26,12 @@ const SignIn = () => {
           <Logo />
         </div>
         <div className="my-10">
-          <h2 className="text-2xl font-semibold text-center">Login</h2>
+          <h2 className="text-2xl font-semibold text-center">Sign Up</h2>
         </div>
-        <SignInForm />
+        <SignUpForm />
       </div>
     </UnauthenticatedUsersLayout>
   )
 }
 
-export default SignIn
+export default SignUp

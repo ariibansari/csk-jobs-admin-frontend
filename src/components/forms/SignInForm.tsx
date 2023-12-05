@@ -8,12 +8,12 @@ import { NavLink } from 'react-router-dom'
 import { useToast } from '../ui/use-toast'
 import Axios from '@/api/axios'
 import "./forms.css"
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const SignInForm = () => {
     const { setUser } = useContext(UserContext)
 
-    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [authenticating, setAuthenticating] = useState(false)
 
@@ -25,28 +25,38 @@ const SignInForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         setAuthenticating(true)
-        Axios.post('/api/auth/login', { username, password })
+        Axios.post('/api/auth/login', { email, password })
             .then((res: any) => {
                 if (res.data) {
-                    let _user: User = {
-                        accessToken: res.data.accessToken,
-                        refreshToken: res.data.refreshToken,
-                        user_id: res.data.user_id,
-                        name: res.data.name,
-                        username: res.data.username,
-                        email: res.data.email,
-                        role: res.data.role
+
+                    if (!res.data.verified) {
+                        navigate(`/verification-pending?email=${res.data.email}`)
+                        return
                     }
+                    else {
+                        let _user: User = {
+                            accessToken: res.data.accessToken,
+                            refreshToken: res.data.refreshToken,
+                            user_id: res.data.user_id,
+                            customer_id: res.data.customer_id,
+                            name: res.data.name,
+                            email: res.data.email,
+                            role: res.data.role
+                        }
 
-                    setUser(_user)
-                    toast({ itemID: "login-toast" }).dismiss()
+                        setUser(_user)
+                        toast({ itemID: "login-toast" }).dismiss()
+
+                        if (redirectTo) {
+                            navigate(redirectTo)
+                        }
+                        else {
+                            navigate("/")
+                        }
+                    }
                 }
-                
+
                 setAuthenticating(false)
-
-                if(redirectTo){
-                    navigate(redirectTo)
-                }
             })
             .catch((error: any) => {
                 setAuthenticating(false)
@@ -70,8 +80,8 @@ const SignInForm = () => {
     return (
         <form onSubmit={handleSubmit} className='w-80 flex flex-col gap-6'>
             <div className='input-grp'>
-                <Label htmlFor="username">Username</Label>
-                <Input type="text" required id="username" value={username} onChange={e => setUsername(e.target.value)} />
+                <Label htmlFor="email">Email</Label>
+                <Input type="email" required id="email" value={email} onChange={e => setEmail(e.target.value)} />
             </div>
             <div className='input-grp'>
                 <Label htmlFor="password">Password</Label>
