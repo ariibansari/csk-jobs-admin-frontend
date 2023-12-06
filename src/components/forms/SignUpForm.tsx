@@ -123,7 +123,7 @@ const SignUpForm = () => {
                         <CgSpinner className="animate-spin text-xl" />
                     }
                 </Button>
-                <NavLink to="/forgot-password" className="text-slate-600 hover:text-slate-700 dark:text-slate-200 dark:hover:text-slate-300">Already a user? Login</NavLink>
+                <NavLink to="/login" className="text-slate-600 hover:text-slate-700 dark:text-slate-200 dark:hover:text-slate-300">Already a user? Login</NavLink>
             </div>
         </form>
     )

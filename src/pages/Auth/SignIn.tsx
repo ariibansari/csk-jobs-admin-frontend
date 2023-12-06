@@ -20,7 +20,7 @@ const SignIn = () => {
 
   return (
     <UnauthenticatedUsersLayout>
-      <div className='h-[100dvh] flex flex-col justify-center items-center'>
+      <div className='h-[90dvh] flex flex-col justify-center items-center'>
         <div className="flex flex-col items-center gap-2">
           <Logo />
         </div>

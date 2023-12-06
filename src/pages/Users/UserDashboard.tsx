@@ -1,6 +1,9 @@
 import { useContext } from 'react'
 import { UserContext } from "@/context/UserProvider"
 import AuthenticatedUsersLayout from '../layouts/AuthenticatedUsersLayout'
+import ProtectedAxios from '@/api/protectedAxios'
+import { toast } from '@/components/ui/use-toast'
+import { Button } from '@/components/ui/button'
 
 
 
@@ -10,11 +13,8 @@ const UserDashboard = () => {
     return (
         <AuthenticatedUsersLayout>
             <div className='my-14'>
-                <h1 className='text-2xl font-semibold'>Dashboard</h1>
-                <div>Name: {user.name}</div>
-                <div>Email: {user.email}</div>
-                <div>Customer ID: {user.customer_id}</div>
-                <div>Role: {user.role}</div>
+                <h1 className='text-2xl font-semibold mb-3'>Dashboard</h1>
+                <div className='text-muted-foreground'>Hello, {user.name}</div>
             </div>
         </AuthenticatedUsersLayout>
     )
