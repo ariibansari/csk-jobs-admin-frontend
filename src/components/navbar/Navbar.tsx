@@ -23,7 +23,7 @@ import { CgSpinner } from 'react-icons/cg'
 
 const Navbar = () => {
   const { user, setUser } = useContext(UserContext)
-  const [subscriptionDetails, loadingSubscriptionDetails] = useSubscriptionDetails()
+  const [subscriptionDetails] = useSubscriptionDetails()
   const [creatingPortalSession, setCreatingPortalSession] = useState(false)
   const navigate = useNavigate()
 
@@ -35,7 +35,7 @@ const Navbar = () => {
 
   const createPortalSession = () => {
     setCreatingPortalSession(true)
-    ProtectedAxios.post("/api/stripe/createPortalSession", { customer_id: user.customer_id })
+    ProtectedAxios.post("/api/subscription/createPortalSession", { customer_id: user.customer_id })
       .then(res => {
         if (res.data) {
           window.location.href = res.data
@@ -56,15 +56,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* {loadingSubscriptionDetails
-        &&
-        <section className='fixed top-0 left-0 w-[100%] bg-background z-20'>
-          <div className='flex justify-center items-center h-[100dvh]'>
-            <CgSpinner className="animate-spin text-3xl" />
-          </div>
-        </section>
-      } */}
-
       <nav className='border border-transparent border-b-input'>
         <div className='flex justify-between items-center py-3 container'>
           <NavLink to="/">
@@ -75,10 +66,13 @@ const Navbar = () => {
               {/* COMMON LINKS */}
               <></>
 
+
               {/* ADMIN ONLY LINKS */}
               {user.role === "ADMIN"
                 &&
-                <></>
+                <>
+                  <CustomNavLink to='/manage-users' label='Users' />
+                </>
               }
 
 
@@ -86,11 +80,12 @@ const Navbar = () => {
               {/* USERS WITH SUBSCRIPTION ONLY LINKS */}
               {user.role === "USER" && subscriptionDetails
                 &&
-                <></>
+                <>
+                  <CustomNavLink to='/api-keys' label='API Keys' />
+                </>
               }
-
-
             </div>
+
             <div className='flex gap-3 item-center'>
               <ModeToggle />
 
@@ -118,6 +113,14 @@ const Navbar = () => {
                             <DropdownMenuShortcut><CgSpinner className="animate-spin text-xl" /></DropdownMenuShortcut>
                           }
                         </DropdownMenuItem>
+                      </>
+                    }
+
+                    {/* ADMIN LINKS */}
+                    {user.role === "ADMIN"
+                      &&
+                      <>
+                        <DropdownMenuItem disabled>Profile</DropdownMenuItem>
                       </>
                     }
 

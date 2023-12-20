@@ -3,7 +3,7 @@ import { UserContext } from "@/context/UserProvider"
 import AuthenticatedUsersLayout from '../layouts/AuthenticatedUsersLayout'
 
 
-const UserDashboard = () => {
+const AdminDashboard = () => {
     const { user } = useContext(UserContext)
 
     return (
@@ -17,4 +17,4 @@ const UserDashboard = () => {
     )
 }
 
-export default UserDashboard
+export default AdminDashboard

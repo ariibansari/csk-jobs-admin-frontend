@@ -1,18 +1,14 @@
-import { Item, Location, NewWarehouseUser, StockTransfer, Unit } from '@/utils/types';
+import { ApiKey, User } from '@/utils/types';
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from 'react';
 
 // Define a discriminated union type for event payloads
 export type EventPayloads = {
   INITIAL_EVENT: {},
-  EDIT_WAREHOUSE_USER: NewWarehouseUser,
-  DELETE_WAREHOUSE_USER: NewWarehouseUser,
-  EDIT_ITEM: Item,
-  DELETE_ITEM: Item,
-  EDIT_LOCATION: Location,
-  DELETE_LOCATION: Location,
-  EDIT_UNIT: Unit,
-  DELETE_UNIT: Unit,
-  DELETE_STOCK_TRANSFER: StockTransfer,
+  EDIT_USER: User,
+  DELETE_USER: User,
+  EDIT_KEY: ApiKey,
+  DELETE_KEY: ApiKey,
+  TOGGLE_KEY_STATUS: ApiKey
   // Define other event names and their payload types here
 }
 

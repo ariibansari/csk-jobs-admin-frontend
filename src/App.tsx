@@ -19,6 +19,9 @@ import useSubscriptionDetails from './hooks/useSubscriptionDetails'
 import SubscriptionCheckoutCancelled from './pages/Subscription/SubscriptionCheckoutCancelled'
 import SubscriptionCheckoutSuccess from './pages/Subscription/SubscriptionCheckoutSuccess'
 import { CgSpinner } from 'react-icons/cg'
+import AdminDashboard from './pages/Admin/AdminDashboard'
+import ManageUsers from './pages/Admin/ManageUsers'
+import ApiKeys from './pages/Users/ApiKeys'
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY); // starts with pk_
@@ -38,8 +41,8 @@ function App() {
               <CgSpinner className="animate-spin text-3xl" />
             </div>
           </section>
-         
-         :
+
+          :
           <BrowserRouter>
             <Routes>
               {
@@ -68,8 +71,10 @@ function App() {
                 &&
                 // COMMON ROUTES FOR AUTHENTICATED USERS
                 <>
+                  <Route path='/confirm-email' element={<ConfirmEmail />} />
                 </>
               }
+
 
               {user.accessToken && user.role === "USER" && subscriptionDetails === null
                 &&
@@ -81,6 +86,7 @@ function App() {
                 </>
               }
 
+
               {user.accessToken && user.role === "USER"
                 &&
                 // COMMON ROUTES FOR AUTHENTICATED USERS WITH or WITHOUT SUBSCRIPTION
@@ -89,22 +95,29 @@ function App() {
                 </>
               }
 
+
               {user.accessToken && user.role === "USER" && subscriptionDetails
                 &&
                 // ROUTES FOR AUTHENTICATED USERS WITH SUBSCRIPTION
                 <>
                   <Route path='/' element={<UserDashboard />} />
+                  <Route path='/api-keys' element={<ApiKeys />} />
                 </>
               }
+
 
               {user.accessToken && user.role === "ADMIN"
                 &&
                 // ROUTES FOR AUTHENTICATED ADMINS
                 <>
+                  <Route path='/' element={<AdminDashboard />} />
+                  <Route path='/manage-users' element={<ManageUsers />} />
                 </>
               }
 
+
               <Route path='*' element={<PageNotFound />} />
+
             </Routes>
           </BrowserRouter>
         }

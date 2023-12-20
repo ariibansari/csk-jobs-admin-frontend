@@ -23,7 +23,7 @@ const SubscriptionList = () => {
 
     const fetchPlans = () => {
         setLoading(true)
-        Axios.get("/api/stripe/allSubscriptionPlans")
+        Axios.get("/api/subscription/allSubscriptionPlans")
             .then(res => {
                 if (res.data) {
                     setPlans(res.data)
@@ -42,7 +42,7 @@ const SubscriptionList = () => {
 
     const createCheckoutSession = (price_id: string) => {
         setCreatingCheckoutSession(true)
-        ProtectedAxios.post("/api/stripe/createCheckoutSession", { price_id, customer_id: user.customer_id })
+        ProtectedAxios.post("/api/subscription/createCheckoutSession", { price_id, customer_id: user.customer_id })
             .then(res => {
                 if (res.data) {
                     window.location.href = res.data

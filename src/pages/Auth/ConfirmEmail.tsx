@@ -5,7 +5,7 @@ import PageNotFound from '../PageNotFound'
 import Axios from '@/api/axios'
 import { useNavigate } from 'react-router-dom'
 import { BadgeCheck } from 'lucide-react'
-import { User, UserContext } from '@/context/UserProvider'
+import { User, UserContext, defaultUserState } from '@/context/UserProvider'
 
 const ConfirmEmail = () => {
   const { setUser } = useContext(UserContext)
@@ -21,6 +21,7 @@ const ConfirmEmail = () => {
   const [timer, setTimer] = useState(5)
 
   useEffect(() => {
+    setUser(defaultUserState.user)
     verifyEmailAndCode()
   }, [])
 
