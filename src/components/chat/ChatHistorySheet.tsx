@@ -72,7 +72,7 @@ const ChatHistorySheet = () => {
                                                 <div><MessageCircle className="w-5" /></div>
                                                 <p className="text-sm">{chat.Messages[0].message.substring(0, 30)}{chat.Messages[0].message.length > 30 && "...."}</p>
                                             </div>
-                                            <p className="text-xs text-right">{pathname} - {format(new Date(chat.created_at), "p dd/MM/yyyy")}</p>
+                                            <p className="text-xs text-right">{format(new Date(chat.created_at), "p dd/MM/yyyy")}</p>
                                         </Link>
                                     ))}
                                 </div>
