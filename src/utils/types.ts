@@ -10,13 +10,8 @@ export type User = {
     offline_plan_access_expires_at?: Date | null,
 }
 
-export type ApiKey = {
-    api_key_id?: number,
-    api_key: string,
-    api_key_name: string,
-    user_id?: number,
-    created_at: Date | null,
-    updated_at?: Date | null,
-    last_used?: Date | null,
-    active?: Boolean,
+export type Files = {
+    id: number,
+    type: string,
+    file: File,
 }

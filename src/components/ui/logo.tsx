@@ -1,7 +1,7 @@
 const Logo = ({ className }: { className?: string }) => {
     return (
         <>
-            <span className={`text-xl font-semibold ${className}`}>GEO Addons</span>
+            <span className={`text-xl font-semibold ${className}`}>Gemini AI Chat</span>
         </>
     )
 }

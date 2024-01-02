@@ -20,6 +20,7 @@ import useSubscriptionDetails from '@/hooks/useSubscriptionDetails'
 import ProtectedAxios from '@/api/protectedAxios'
 import { toast } from '../ui/use-toast'
 import { CgSpinner } from 'react-icons/cg'
+import ChatHistorySheet from '../chat/ChatHistorySheet'
 
 const Navbar = () => {
   const { user, setUser } = useContext(UserContext)
@@ -58,9 +59,13 @@ const Navbar = () => {
     <>
       <nav className='border border-transparent border-b-input'>
         <div className='flex justify-between items-center py-3 container'>
-          <NavLink to="/">
-            <Logo />
-          </NavLink>
+          <div className='flex items-center gap-3'>
+            <ChatHistorySheet />
+            <NavLink to="/">
+              <Logo />
+            </NavLink>
+          </div>
+
           <div className='flex items-center gap-7'>
             <div className='flex gap-5'>
               {/* COMMON LINKS */}
@@ -91,9 +96,10 @@ const Navbar = () => {
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <div className='flex items-center gap-1 cursor-pointer text-sm'>
-                    {user.name}
-                    <ChevronDown className='w-4' />
+                  <div className='flex items-end -gap-1 cursor-pointer text-sm'>
+                    {/* {user.name.substring(0, 10)} {user.name.length > 10 && "..."} */}
+                    <span className='w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 uppercase hover:outline outline-3 outline-input'>{user.email.substring(0, 1)}</span>
+                    {/* <ChevronDown className='w-4 -mb-2' /> */}
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">

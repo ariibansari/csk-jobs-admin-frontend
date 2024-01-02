@@ -11,17 +11,16 @@ import PageNotFound from './pages/PageNotFound'
 import SignUp from './pages/Auth/SingUp'
 import VerificationPending from './pages/Auth/VerificationPending'
 import ConfirmEmail from './pages/Auth/ConfirmEmail'
-import UserDashboard from './pages/Users/UserDashboard'
-import SubscriptionList from './pages/Users/SubscriptionList'
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from '@stripe/stripe-js';
 import useSubscriptionDetails from './hooks/useSubscriptionDetails'
-import SubscriptionCheckoutCancelled from './pages/Subscription/SubscriptionCheckoutCancelled'
 import SubscriptionCheckoutSuccess from './pages/Subscription/SubscriptionCheckoutSuccess'
 import { CgSpinner } from 'react-icons/cg'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import ManageUsers from './pages/Admin/ManageUsers'
-import ApiKeys from './pages/Users/ApiKeys'
+import AllChats from './pages/Users/Chats/AllChats'
+import NewChat from './pages/Users/Chats/NewChat'
+import Chat from './pages/Users/Chats/Chat'
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY); // starts with pk_
@@ -32,7 +31,7 @@ function App() {
 
   return (
     <Elements stripe={stripePromise}>
-      <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <Toaster />
         {loadingSubscriptionDetails
           ?
@@ -76,7 +75,7 @@ function App() {
               }
 
 
-              {user.accessToken && user.role === "USER" && subscriptionDetails === null
+              {/* {user.accessToken && user.role === "USER" && subscriptionDetails === null
                 &&
                 // ROUTES FOR AUTHENTICATED USERS WITHOUT SUBSCRIPTION
                 <>
@@ -84,7 +83,7 @@ function App() {
                   <Route path='/subscription/checkout/cancelled' element={<SubscriptionCheckoutCancelled />} />
                   <Route path='/subscription/checkout/success/:checkout_session_id' element={<SubscriptionCheckoutSuccess />} />
                 </>
-              }
+              } */}
 
 
               {user.accessToken && user.role === "USER"
@@ -96,12 +95,13 @@ function App() {
               }
 
 
-              {user.accessToken && user.role === "USER" && subscriptionDetails
+              {user.accessToken && user.role === "USER"
+                // && subscriptionDetails
                 &&
                 // ROUTES FOR AUTHENTICATED USERS WITH SUBSCRIPTION
                 <>
-                  <Route path='/' element={<UserDashboard />} />
-                  <Route path='/api-keys' element={<ApiKeys />} />
+                  <Route path='/' element={<NewChat />} />
+                  <Route path='/chat/:chat_id' element={<Chat />} />
                 </>
               }
 

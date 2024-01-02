@@ -6,7 +6,7 @@ const AuthenticatedUsersLayout = (props: React.PropsWithChildren) => {
     return (
         <section className="min-h-[100dvh]">
             <Navbar />
-            <div className='container py-[10dvh]'>
+            <div className='py-[10dvh]'>
                 {props.children}
             </div>
             <Footer />

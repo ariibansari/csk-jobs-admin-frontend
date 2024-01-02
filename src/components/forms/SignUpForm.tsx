@@ -12,7 +12,6 @@ import { X } from 'lucide-react'
 const SignUpForm = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
-    const [company, setCompnay] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [authenticating, setAuthenticating] = useState(false)
@@ -50,7 +49,7 @@ const SignUpForm = () => {
 
         setAuthenticating(true)
 
-        Axios.post('/api/auth/signup', { name, email, company, password })
+        Axios.post('/api/auth/signup', { name, email, password })
             .then((res: any) => {
                 if (res.data) {
                     navigate(`/verification-pending?email=${email}`)
@@ -84,13 +83,9 @@ const SignUpForm = () => {
             </div>
 
             <div className='grid grid-cols-2 gap-3'>
-                <div className='input-grp'>
+                <div className='input-grp col-span-2'>
                     <Label htmlFor="email">Email <span className='text-destructive'>*</span></Label>
                     <Input type="email" required id="email" value={email} onChange={e => setEmail(e.target.value)} />
-                </div>
-                <div className='input-grp'>
-                    <Label htmlFor="company">Company</Label>
-                    <Input type="text" id="company" value={company} onChange={e => setCompnay(e.target.value)} />
                 </div>
             </div>
 
