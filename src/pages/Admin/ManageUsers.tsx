@@ -75,47 +75,49 @@ const ManageUsers = () => {
 
     return (
         <AuthenticatedUsersLayout>
-            <div className='flex justify-between'>
-                <h1 className='text-2xl font-medium'>Manage Users</h1>
-                <CreateUserDialog
-                    functionToExecuteAfterAddingUser={(new_user: User) => {
+            <div className='container'>
+                <div className='flex justify-between'>
+                    <h1 className='text-2xl font-medium'>Manage Users</h1>
+                    <CreateUserDialog
+                        functionToExecuteAfterAddingUser={(new_user: User) => {
+                            setUsers(prev => {
+                                let updatedData = [...prev]
+                                updatedData.unshift(new_user)
+                                return updatedData
+                            })
+                        }}
+                    />
+                </div>
+
+                <UserDataTable columns={usersColumns} data={users} loadingState={fetchingUsers} />
+
+                <EditUserDialog
+                    selectedUser={selectedUserData}
+                    functionToExecuteAfterUpdatingUser={(updated_user_data: User) => {
                         setUsers(prev => {
-                            let updatedData = [...prev]
-                            updatedData.unshift(new_user)
-                            return updatedData
+                            let updatedUsers = [...prev]
+                            let indexOfSelectedUser = updatedUsers.findIndex(user => user.email === updated_user_data.email)
+                            updatedUsers[indexOfSelectedUser] = { ...updated_user_data }
+                            return updatedUsers
                         })
                     }}
+                    dialogState={editUserDialogState}
+                    dialogStateSetter={setEditUserDialogState}
+
+                />
+
+                <DeleteUserDialog
+                    selectedUser={selectedUserData}
+                    functionToExecuteAfterDeletingUser={(deleted_user_id: number) => {
+                        setUsers(prev => {
+                            let updatedUsers = prev.filter(user => user.user_id !== deleted_user_id)
+                            return updatedUsers
+                        })
+                    }}
+                    dialogState={deleteUserDialogState}
+                    dialogStateSetter={setDeleteUserDialogState}
                 />
             </div>
-
-            <UserDataTable columns={usersColumns} data={users} loadingState={fetchingUsers} />
-
-            <EditUserDialog
-                selectedUser={selectedUserData}
-                functionToExecuteAfterUpdatingUser={(updated_user_data: User) => {
-                    setUsers(prev => {
-                        let updatedUsers = [...prev]
-                        let indexOfSelectedUser = updatedUsers.findIndex(user => user.email === updated_user_data.email)
-                        updatedUsers[indexOfSelectedUser] = { ...updated_user_data }
-                        return updatedUsers
-                    })
-                }}
-                dialogState={editUserDialogState}
-                dialogStateSetter={setEditUserDialogState}
-
-            />
-
-            <DeleteUserDialog
-                selectedUser={selectedUserData}
-                functionToExecuteAfterDeletingUser={(deleted_user_id: number) => {
-                    setUsers(prev => {
-                        let updatedUsers = prev.filter(user => user.user_id !== deleted_user_id)
-                        return updatedUsers
-                    })
-                }}
-                dialogState={deleteUserDialogState}
-                dialogStateSetter={setDeleteUserDialogState}
-            />
         </AuthenticatedUsersLayout>
     )
 }

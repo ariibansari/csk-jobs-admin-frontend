@@ -8,7 +8,7 @@ const AdminDashboard = () => {
 
     return (
         <AuthenticatedUsersLayout>
-            <div className='my-14'>
+            <div className='my-14 container'>
                 <h1 className='text-2xl font-semibold mb-3'>Dashboard</h1>
                 <div className='text-muted-foreground'>Hello, {user.name}</div>
                 <div className='text-muted-foreground'>{user.role}</div>

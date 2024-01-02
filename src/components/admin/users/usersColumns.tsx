@@ -45,75 +45,77 @@ export const usersColumns: ColumnDef<User>[] = [
     accessorKey: "email",
     header: "Email",
   },
+  // {
+  //   id: "Plan",
+  //   header: "Plan",
+  //   cell: ({ row }) => {
+  //     const user = row.original
+  //     const [loadingSubscriptionDetails, setLoadingSubscriptionDetails] = useState(false)
+  //     const [subscriptionDetails, setSubscriptionDetails] = useState<SubscriptionDetails | null>(null)
+  //     useEffect(() => {
+  //       fetchSubscriptionDetails()
+  //     }, [row])
+
+  //     const fetchSubscriptionDetails = () => {
+  //       setLoadingSubscriptionDetails(true)
+  //       ProtectedAxios.get(`/api/subscription/subscribedPlanDetails/${user.user_id}`)
+  //         .then(res => {
+  //           setSubscriptionDetails(res.data)
+  //           setLoadingSubscriptionDetails(false)
+  //         })
+  //         .catch(err => {
+  //           console.log(err);
+  //           setLoadingSubscriptionDetails(false)
+  //           if (err.response.status === 500) {
+  //             alert(err.response.data.error)
+  //           }
+  //         })
+  //     }
+
+  //     return (
+  //       <>
+  //         {loadingSubscriptionDetails
+  //           ? <CgSpinner className="animate-spin text-xl" />
+
+  //           :
+  //           subscriptionDetails
+  //             ?
+  //             // Have an admin-created subscription access
+  //             subscriptionDetails.offline_plan_access
+  //               ?
+  //               <p className='flex flex-col items-start gap-2'>
+  //                 {subscriptionDetails.plan}
+  //                 <OfflinePlanBadge />
+  //                 {subscriptionDetails.offline_plan_access_expires_at !== undefined
+  //                   &&
+  //                   <span className="text-muted-foreground">Ends on: {format(new Date(subscriptionDetails.offline_plan_access_expires_at), "dd/MM/yyyy p")}</span>
+  //                 }
+  //               </p>
+
+  //               :
+  //               // Have an actual subscription
+  //               <p className='flex items-center gap-2'>{subscriptionDetails.plan}</p>
+
+  //             :
+  //             // Have no active subscription
+  //             <p className='text-red-500'>No Plan</p>
+  //         }
+  //       </>
+  //     )
+  //   }
+  // },
   {
-    accessorKey: "company_name",
-    header: "Company",
-    cell: ({ row }) => {
-      if (row.getValue("company_name")) {
-        return row.getValue("company_name")
-      }
-      else {
-        return "-"
-      }
+    accessorKey: "Chats",
+    header: "Chats",
+    cell: ({row}) => {
+      return row.original.Chats?.length
     }
   },
   {
-    id: "Plan",
-    header: "Plan",
-    cell: ({ row }) => {
-      const user = row.original
-      const [loadingSubscriptionDetails, setLoadingSubscriptionDetails] = useState(false)
-      const [subscriptionDetails, setSubscriptionDetails] = useState<SubscriptionDetails | null>(null)
-      useEffect(() => {
-        fetchSubscriptionDetails()
-      }, [row])
-
-      const fetchSubscriptionDetails = () => {
-        setLoadingSubscriptionDetails(true)
-        ProtectedAxios.get(`/api/subscription/subscribedPlanDetails/${user.user_id}`)
-          .then(res => {
-            setSubscriptionDetails(res.data)
-            setLoadingSubscriptionDetails(false)
-          })
-          .catch(err => {
-            console.log(err);
-            setLoadingSubscriptionDetails(false)
-            if (err.response.status === 500) {
-              alert(err.response.data.error)
-            }
-          })
-      }
-
-      return (
-        <>
-          {loadingSubscriptionDetails
-            ? <CgSpinner className="animate-spin text-xl" />
-
-            :
-            subscriptionDetails
-              ?
-              // Have an admin-created subscription access
-              subscriptionDetails.offline_plan_access
-                ?
-                <p className='flex flex-col items-start gap-2'>
-                  {subscriptionDetails.plan}
-                  <OfflinePlanBadge />
-                  {subscriptionDetails.offline_plan_access_expires_at !== undefined
-                    &&
-                    <span className="text-muted-foreground">Ends on: {format(new Date(subscriptionDetails.offline_plan_access_expires_at), "dd/MM/yyyy p")}</span>
-                  }
-                </p>
-
-                :
-                // Have an actual subscription
-                <p className='flex items-center gap-2'>{subscriptionDetails.plan}</p>
-
-              :
-              // Have no active subscription
-              <p className='text-red-500'>No Plan</p>
-          }
-        </>
-      )
+    accessorKey: "Messages",
+    header: "Messages",
+    cell: ({row}) => {
+      return row.original.Messages?.length
     }
   },
   {

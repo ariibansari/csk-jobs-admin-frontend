@@ -25,12 +25,12 @@ const DeleteUserDialog = ({ selectedUser, functionToExecuteAfterDeletingUser, to
     const [subscriptionDetails, setSubscriptionDetails] = useState<SubscriptionDetails | null>(null)
 
 
-    useEffect(() => {
-        if (dialogState) {
-            setSelectedUserData(selectedUser)
-            fetchSubscriptionDetails()
-        }
-    }, [selectedUser])
+    // useEffect(() => {
+    //     if (dialogState) {
+    //         setSelectedUserData(selectedUser)
+    //         fetchSubscriptionDetails()
+    //     }
+    // }, [selectedUser])
 
     const fetchSubscriptionDetails = () => {
         setLoadingSubscriptionDetails(true)
@@ -145,7 +145,7 @@ const DeleteUserDialog = ({ selectedUser, functionToExecuteAfterDeletingUser, to
                                     <DialogDescription>
                                         <p>Name: {selectedUserData.name}</p>
                                         <p>Email: {selectedUserData.email}</p>
-                                        <p className='text-red-500 mt-2'>No Plans selected</p>
+                                        {/* <p className='text-red-500 mt-2'>No Plans selected</p> */}
                                     </DialogDescription>
                                 </div>
                                 <DialogFooter>

@@ -60,7 +60,10 @@ const Navbar = () => {
       <nav className='border border-transparent border-b-input'>
         <div className='flex justify-between items-center py-3 container'>
           <div className='flex items-center gap-3'>
-            <ChatHistorySheet />
+            {user.role === "USER"
+              &&
+              <ChatHistorySheet />
+            }
             <NavLink to="/">
               <Logo />
             </NavLink>

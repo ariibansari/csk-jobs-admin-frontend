@@ -118,7 +118,7 @@ const CreateUserDialog = ({ functionToExecuteAfterAddingUser, toggleButton }: { 
                 </DialogTrigger>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>New Warehouse User</DialogTitle>
+                        <DialogTitle>New User</DialogTitle>
                         <DialogDescription>
                             Fill in the details to create a new user
                         </DialogDescription>
@@ -132,12 +132,12 @@ const CreateUserDialog = ({ functionToExecuteAfterAddingUser, toggleButton }: { 
                                 <Input required type='text' id="name" className="col-span-3" value={newUserData.name} onChange={e => { setError(""); setNewUserData({ ...newUserData, name: e.target.value }) }} />
                             </div>
 
-                            <div className="grid grid-cols-4 items-center gap-4">
+                            {/* <div className="grid grid-cols-4 items-center gap-4">
                                 <Label htmlFor="company" className="text-right">
                                     Company
                                 </Label>
                                 <Input type='text' id="company" className="col-span-3" value={newUserData.companyName} onChange={e => { setError(""); setNewUserData({ ...newUserData, companyName: e.target.value }) }} />
-                            </div>
+                            </div> */}
 
                             <div className="grid grid-cols-4 items-center gap-4">
                                 <Label htmlFor="email" className="text-right">
@@ -161,7 +161,7 @@ const CreateUserDialog = ({ functionToExecuteAfterAddingUser, toggleButton }: { 
                                 </div>
                             </div>
 
-                            <hr />
+                            {/* <hr />
 
                             <div>
                                 <div className="flex items-center space-x-2 mb-4">
@@ -258,7 +258,7 @@ const CreateUserDialog = ({ functionToExecuteAfterAddingUser, toggleButton }: { 
                                         }
                                     </>
                                 }
-                            </div>
+                            </div> */}
 
                             {error.length > 0
                                 &&

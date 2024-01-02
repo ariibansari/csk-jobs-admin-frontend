@@ -167,7 +167,7 @@ const EditUserDialog = ({ selectedUser, functionToExecuteAfterUpdatingUser, togg
                 }
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Edit Warehouse User</DialogTitle>
+                        <DialogTitle>Edit User</DialogTitle>
                         <DialogDescription>
                             Update the details and click on save button to update the user
                         </DialogDescription>
@@ -179,12 +179,6 @@ const EditUserDialog = ({ selectedUser, functionToExecuteAfterUpdatingUser, togg
                                     Name
                                 </Label>
                                 <Input required type='text' id="name" className="col-span-3" value={selectedUserData.name} onChange={e => { setError(""); setSelectedUserData({ ...selectedUserData, name: e.target.value }) }} />
-                            </div>
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="company_name" className="text-right">
-                                    Company
-                                </Label>
-                                <Input type='text' id="company_name" className="col-span-3" value={selectedUserData.companyName} onChange={e => { setError(""); setSelectedUserData({ ...selectedUserData, companyName: e.target.value }) }} />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
                                 <Label htmlFor="password" className="text-right">
@@ -201,9 +195,9 @@ const EditUserDialog = ({ selectedUser, functionToExecuteAfterUpdatingUser, togg
                                 </div>
                             </div>
 
-                            <hr />
+                            {/* <hr /> */}
 
-                            {loadingSubscriptionDetails
+                            {/* {loadingSubscriptionDetails
                                 ?
                                 <div className="flex items-center gap-4 mr-4">
                                     <Skeleton className='w-7 h-7 ml-auto' />
@@ -328,7 +322,7 @@ const EditUserDialog = ({ selectedUser, functionToExecuteAfterUpdatingUser, togg
                                         </div>
                                     }
                                 </>
-                            }
+                            } */}
 
                             {error.length > 0
                                 &&

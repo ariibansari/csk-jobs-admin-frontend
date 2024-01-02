@@ -8,6 +8,8 @@ export type User = {
     offline_plan?: "PLAN_A" | "PLAN_B" | "PLAN_C" | "PLAN_D",
     offline_plan_access_given_at?: Date | null,
     offline_plan_access_expires_at?: Date | null,
+    Chats?: [],
+    Messages?: []
 }
 
 export type Files = {
