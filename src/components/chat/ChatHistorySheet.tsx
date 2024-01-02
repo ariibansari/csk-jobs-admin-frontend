@@ -13,7 +13,7 @@ import { useContext, useEffect, useState } from "react"
 import ProtectedAxios from "@/api/protectedAxios"
 import { UserContext } from "@/context/UserProvider"
 import { format } from "date-fns"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 type Message = {
     message: string,
@@ -28,6 +28,7 @@ const ChatHistorySheet = () => {
     const { user } = useContext(UserContext)
     const [chats, setChats] = useState<Chat[]>([])
     const [loading, setLoading] = useState(true)
+    let { pathname } = useLocation()
 
     useEffect(() => {
         fetchChatHistory()
@@ -64,14 +65,14 @@ const ChatHistorySheet = () => {
                                 ? <p className="text-sm py-10">You don't have any chats yets</p>
 
                                 :
-                                <div className="flex flex-col gap-2 max-h-[90dvh] overflow-y-scroll small-scrollbar px-2">
+                                <div className="flex flex-col gap-2 max-h-[90dvh] overflow-y-scroll small-scrollbar px-2 pb-3 pt-2">
                                     {chats.map((chat, i) => (
-                                        <Link to={`/chat/${chat.chat_id}`} key={i} className="min-h-10 rounded-md px-2 py-2 hover:bg-muted cursor-pointer">
+                                        <Link to={`/chat/${chat.chat_id}`} reloadDocument key={i} className={`min-h-10 rounded-md px-3 py-2 hover:bg-slate-400 dark:hover:bg-muted cursor-pointer ${pathname === `/chat/${chat.chat_id}` && "bg-slate-400 dark:bg-muted"}`}>
                                             <div className="flex items-center justify-between gap-2">
                                                 <div><MessageCircle className="w-5" /></div>
                                                 <p className="text-sm">{chat.Messages[0].message.substring(0, 30)}{chat.Messages[0].message.length > 30 && "...."}</p>
                                             </div>
-                                            <p className="text-xs text-right">{format(new Date(chat.created_at), "p dd/MM/yyyy")}</p>
+                                            <p className="text-xs text-right">{pathname} - {format(new Date(chat.created_at), "p dd/MM/yyyy")}</p>
                                         </Link>
                                     ))}
                                 </div>
