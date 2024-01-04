@@ -21,6 +21,7 @@ import ManageUsers from './pages/Admin/ManageUsers'
 import AllChats from './pages/Users/Chats/AllChats'
 import NewChat from './pages/Users/Chats/NewChat'
 import Chat from './pages/Users/Chats/Chat'
+import AppSettings from './pages/Admin/AppSettings'
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY); // starts with pk_
@@ -112,6 +113,7 @@ function App() {
                 <>
                   <Route path='/' element={<AdminDashboard />} />
                   <Route path='/manage-users' element={<ManageUsers />} />
+                  <Route path='/app-settings' element={<AppSettings />} />
                 </>
               }
 

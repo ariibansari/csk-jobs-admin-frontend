@@ -75,7 +75,7 @@ const NewChat = () => {
                 .catch(error => {
                     console.log(error);
                     setLoading(false)
-                    alert("Could not create chat at the moment")
+                    alert(error.response.data.error)
                 })
         }
     }

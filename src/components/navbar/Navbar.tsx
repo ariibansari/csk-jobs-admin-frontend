@@ -80,6 +80,7 @@ const Navbar = () => {
                 &&
                 <>
                   <CustomNavLink to='/manage-users' label='Users' />
+                  <CustomNavLink to='/app-settings' label='App Settings' />
                 </>
               }
 

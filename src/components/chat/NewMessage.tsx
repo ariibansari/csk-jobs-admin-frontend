@@ -75,28 +75,11 @@ const NewMessage = ({ chat_id, addMessage }: { chat_id: number, addMessage: Func
                 .catch(error => {
                     console.log(error);
                     setLoading(false)
-                    alert("Could not add message at the moment")
+                    alert(error.response.data.error)
                 })
         }
     }
 
-    const handleFileSelect = (e: ChangeEvent<HTMLInputElement>, type: string) => {
-        const file = e.target.files
-        if (file) {
-            if (file[0].type !== type) {
-                alert("Invalid file")
-                return
-            }
-
-            else {
-                setFiles(prev => { return [...prev, { id: new Date().getTime(), type, file: file[0] }] })
-            }
-
-        }
-
-        e.target.value = ""
-        setFileUploadDrawer(false)
-    }
 
     const removeFile = (id: number) => {
         setFiles(prev => {
